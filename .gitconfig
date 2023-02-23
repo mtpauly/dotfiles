@@ -1,3 +1,5 @@
 [user]
 	name = mtp61
 	email = mpauly@college.harvard.edu
+[core]
+	editor = nvim
