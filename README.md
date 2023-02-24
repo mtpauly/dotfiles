@@ -9,11 +9,13 @@
         - Highlighting: [syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - Editor: [nvim](https://github.com/neovim/neovim)
     - Package Manger: [packer.nvim](https://github.com/wbthomason/packer.nvim)
+    - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
 - Mac OS Window Manger: [yabai](https://github.com/koekeishiya/yabai)
 - Mac OS Keybinds: [skhd](https://github.com/koekeishiya/skhd)
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
     - Theme: [Omni](https://github.com/getomni/iterm)
+    - Extra Symbols: [Nerdfont](https://www.nerdfonts.com/)
 
 ### Nvim Plugins
 
