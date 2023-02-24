@@ -1,10 +1,12 @@
 --block cursor
 vim.opt.guicursor = ""
 
+--leader
+vim.g.mapleader = " "
+
 --line numbers
 vim.opt.nu = true
 vim.opt.rnu = true
-
 
 --tabs
 vim.opt.tabstop = 4
@@ -37,7 +39,4 @@ vim.opt.updatetime = 50
 
 --color the 80th column
 --vim.opt.colorcolumn = "80"
-
---leader
-vim.g.mapleader = " "
 

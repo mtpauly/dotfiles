@@ -24,8 +24,31 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+--delete without copying
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
 --quickfix navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+--this is going to get me cancelled
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
+vim.keymap.set("n", "Q", "<nop>")
+
+--tmux management
+--vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+--replace current word
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+--make file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+--open packer
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/lua/mtpenguin/packer.lua<CR>");
+vim.keymap.set("n", "<leader><leader>", function()
+    vim.cmd("so")
+end)
