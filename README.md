@@ -15,3 +15,7 @@
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
     - Theme: [Omni](https://github.com/getomni/iterm)
 
+### Nvim Plugins
+
+- [Copilot](https://github.com/github/copilot.vim)
+
