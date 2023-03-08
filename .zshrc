@@ -98,6 +98,9 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -106,6 +109,24 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/mtp/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/mtp/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/mtp/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/mtp/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# no beep
+unsetopt BEEP LIST_BEEP
 
 # aliases
 alias t=tmux
@@ -127,15 +148,6 @@ export MATH113=/Users/mtp/School/math113
 export CS229=/Users/mtp/School/cs229
 export GENED1125=/Users/mtp/School/gened1125
 
-# useful functions
-function nat { # "nvim at"
-    cd $1
-    tmux new -d -s $1
-    tmux send -t $1 "nvim ." C-m
-    tmux a -t $1
-    popd
-}
-
 # sparse probing
 export HF_DATASETS_CACHE=/Users/mtp/Downloads/sparse-probing/hf_datasets_cache
 export FEATURE_DATASET_DIR=/Users/mtp/Downloads/sparse-probing/feature_dataset_dir
@@ -145,6 +157,36 @@ export RESULTS_DIR=/Users/mtp/Downloads/sparse-probing/results
 
 # remote machines
 export SUPERCLOUD=mpauly@txe1-login.mit.edu
+export TESLA_T4_BOX=ec2-44-214-124-190.compute-1.amazonaws.com
+export V100_BOX=ec2-18-235-142-16.compute-1.amazonaws.com
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# useful functions
+function nat { # "nvim at"
+    cd $1
+    tmux new -d -s $1
+    tmux send -t $1 "nvim ." C-m
+    tmux a -t $1
+    popd
+}
+
+function els { # "ec2 ls"
+    aws ec2 describe-instances --query "Reservations[].Instances[].[Tags[0].Value,InstanceId,InstanceType,State.Name,PublicDnsName]"
+}
+
+function estart { # "ec2 start"
+    instances=$(els)
+    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
+    line=$((line + 1))
+    instance_line=$(echo $instances | sed -n "${line}p")
+    instance_id=$(echo $instance_line | cut -f 2 -d '"')
+    echo $(aws ec2 start-instances --instance-ids ${instance_id})
+}
+
+function estop { # "ec2 stop"
+    instances=$(els)
+    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
+    line=$((line + 1))
+    instance_line=$(echo $instances | sed -n "${line}p")
+    instance_id=$(echo $instance_line | cut -f 2 -d '"')
+    echo $(aws ec2 stop-instances --instance-ids ${instance_id})
+}
