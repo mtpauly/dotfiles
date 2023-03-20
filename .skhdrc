@@ -4,12 +4,6 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
-# swap managed window
-# shift + alt - h : yabai -m window --swap west
-# shift + alt - j : yabai -m window --swap south
-# shift + alt - k : yabai -m window --swap north
-# shift + alt - l : yabai -m window --swap east
-
 # move managed window
 shift + alt + ctrl - h : yabai -m window --warp west
 shift + alt + ctrl - j : yabai -m window --warp south
@@ -45,6 +39,7 @@ shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
 
 # focus next / previous desktop
 alt - n : yabai -m space --focus next || yabai -m space --focus first
+alt - p : yabai -m space --focus prev || yabai -m space --focus last
 shift + alt - n : yabai -m space --focus prev || yabai -m space --focus last
 
 # focus desktop
@@ -69,15 +64,7 @@ shift + alt - l : yabai -m window --resize left:10:0 || yabai -m window --resize
 shift + alt - k : yabai -m window --resize top:0:-10 || yabai -m window --resize bottom:0:-10
 shift + alt - j : yabai -m window --resize top:0:10 || yabai -m window --resize bottom:0:10
 
-# toggle padding and gap
-# alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
-
-# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
-# shift + alt - n : yabai -m space --create && \
-#                    index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-#                    yabai -m window --space "${index}" && \
-#                    yabai -m space --focus "${index}"
-
-# send window to monitor and follow focus
-# shift + alt - n : yabai -m window --display next; yabai -m display --focus next
-# shift + alt - p : yabai -m window --display previous; yabai -m display --focus previous
+# open specific applications
+alt - y : open -a "Google Chrome"
+alt - u : open -a "iTerm"
+# TODO

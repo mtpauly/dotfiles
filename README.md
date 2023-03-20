@@ -18,6 +18,8 @@
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
     - Theme: [Omni](https://github.com/getomni/iterm)
     - Extra Symbols: [Nerdfont](https://www.nerdfonts.com/)
+    - Font: [FiraCode](https://github.com/tonsky/FiraCode)
+- Conda: [miniforge](https://github.com/conda-forge/miniforge)
 
 ### Nvim Plugins
 

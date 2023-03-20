@@ -136,10 +136,11 @@ alias p=python
 alias g=rg
 
 # my directories
+export KDROPOUT=/Users/mtp/Projects/k-dropout
 export DECKBUILDER=/Users/mtp/Projects/deckbuilder
 export GPTCHESS=/Users/mtp/Projects/gpt-chess
 export CHAOSSIM=/Users/mtp/Projects/chaos_simulator_python
-export KDROPOUT=/Users/mtp/Projects/k-dropout
+export SUPERAUTO=/Users/mtp/Projects/superauto
 
 export OBSIDIAN=/Users/mtp/Documents/personal
 
@@ -152,7 +153,7 @@ export GENED1125=/Users/mtp/School/gened1125
 export HF_DATASETS_CACHE=/Users/mtp/Downloads/sparse-probing/hf_datasets_cache
 export FEATURE_DATASET_DIR=/Users/mtp/Downloads/sparse-probing/feature_dataset_dir
 export TRANSFORMERS_CACHE=/Users/mtp/Downloads/sparse-probing/transformers_cache
-export SPARSE_PROBING_ROOT=/Users/mtp/Projects/alignment/sparse-probing
+export SPARSE_PROBING_ROOT=/Users/mtp/Projects/sparse-probing
 export RESULTS_DIR=/Users/mtp/Downloads/sparse-probing/results
 
 # remote machines
@@ -179,7 +180,7 @@ function estart { # "ec2 start"
     line=$((line + 1))
     instance_line=$(echo $instances | sed -n "${line}p")
     instance_id=$(echo $instance_line | cut -f 2 -d '"')
-    echo $(aws ec2 start-instances --instance-ids ${instance_id})
+    aws ec2 start-instances --instance-ids ${instance_id}
 }
 
 function estop { # "ec2 stop"
@@ -188,5 +189,14 @@ function estop { # "ec2 stop"
     line=$((line + 1))
     instance_line=$(echo $instances | sed -n "${line}p")
     instance_id=$(echo $instance_line | cut -f 2 -d '"')
-    echo $(aws ec2 stop-instances --instance-ids ${instance_id})
+    aws ec2 stop-instances --instance-ids ${instance_id}
+}
+
+function essh { # "ssh to ec2 instance"
+    instances=$(els)
+    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
+    line=$((line + 4))
+    instance_line=$(echo $instances | sed -n "${line}p")
+    instance_id=$(echo $instance_line | cut -f 2 -d '"')
+    ssh ${instance_id}
 }
