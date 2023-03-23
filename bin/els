@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # "ec2 ls"
 aws ec2 describe-instances --query "Reservations[].Instances[].[Tags[0].Value,InstanceId,InstanceType,State.Name,PublicDnsName]"

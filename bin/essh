@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # "ssh to ec2 instance"
 instances=$(els)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # "nvim at"
 cd $1
