@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# "ssh to ec2 instance"
+instances=$(els)
+line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
+line=$((line + 4))
+instance_line=$(echo $instances | sed -n "${line}p")
+instance_id=$(echo $instance_line | cut -f 2 -d '"')
+ssh ${instance_id}

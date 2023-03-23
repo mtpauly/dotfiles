@@ -161,7 +161,5 @@ export SUPERCLOUD=mpauly@txe1-login.mit.edu
 export TESLA_T4_BOX=ec2-44-214-124-190.compute-1.amazonaws.com
 export V100_BOX=ec2-18-235-142-16.compute-1.amazonaws.com
 
-# source functions
-for file in ~/.dotfiles/functions/*(.); do
-  source $file
-done
+# add scripts
+export PATH=$PATH:/Users/mtp/bin
