@@ -1,4 +1,4 @@
-!/bin/zsh
+#!/bin/zsh
 
 # "markdown less"
 glow -s dark $1 | less -r
