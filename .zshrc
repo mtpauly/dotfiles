@@ -161,42 +161,7 @@ export SUPERCLOUD=mpauly@txe1-login.mit.edu
 export TESLA_T4_BOX=ec2-44-214-124-190.compute-1.amazonaws.com
 export V100_BOX=ec2-18-235-142-16.compute-1.amazonaws.com
 
-# useful functions
-function nat { # "nvim at"
-    cd $1
-    tmux new -d -s $1
-    tmux send -t $1 "nvim ." C-m
-    tmux a -t $1
-    popd
-}
-
-function els { # "ec2 ls"
-    aws ec2 describe-instances --query "Reservations[].Instances[].[Tags[0].Value,InstanceId,InstanceType,State.Name,PublicDnsName]"
-}
-
-function estart { # "ec2 start"
-    instances=$(els)
-    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
-    line=$((line + 1))
-    instance_line=$(echo $instances | sed -n "${line}p")
-    instance_id=$(echo $instance_line | cut -f 2 -d '"')
-    aws ec2 start-instances --instance-ids ${instance_id}
-}
-
-function estop { # "ec2 stop"
-    instances=$(els)
-    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
-    line=$((line + 1))
-    instance_line=$(echo $instances | sed -n "${line}p")
-    instance_id=$(echo $instance_line | cut -f 2 -d '"')
-    aws ec2 stop-instances --instance-ids ${instance_id}
-}
-
-function essh { # "ssh to ec2 instance"
-    instances=$(els)
-    line=$(echo "$instances" | fgrep -n $1 | cut -f 1 -d :)
-    line=$((line + 4))
-    instance_line=$(echo $instances | sed -n "${line}p")
-    instance_id=$(echo $instance_line | cut -f 2 -d '"')
-    ssh ${instance_id}
-}
+# source functions
+for file in ~/.dotfiles/functions/*(.); do
+  source $file
+done
