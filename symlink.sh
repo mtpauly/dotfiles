@@ -1,15 +1,16 @@
 #!/bin/zsh
 
-# to user root
-# config files
-ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
-ln -s $HOME/.dotfiles/.skhdrc $HOME/.skhdrc
-ln -s $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
-ln -s $HOME/.dotfiles/.yabairc $HOME/.yabairc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
-# bin
-ln -s $HOME/.dotfiles/bin $HOME
+# home
+ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
+ln -sf $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
+ln -sf $HOME/.dotfiles/.yabairc $HOME/.yabairc
+ln -sf $HOME/.dotfiles/.skhdrc $HOME/.skhdrc
+ln -sf $HOME/.dotfiles/.p10k.zsh $HOME/.p10k.zsh
 
-# to .config
-ln -s $HOME/.dotfiles/nvim $HOME/.config
+# .config
+ln -sf $HOME/.dotfiles/nvim $HOME/.config
+ln -sf $HOME/.dotfiles/tmux $HOME/.config
+
+# bin
+ln -sf $HOME/.dotfiles/bin $HOME
 
