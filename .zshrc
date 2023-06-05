@@ -77,8 +77,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(
+    git
+    vi-mode
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    conda-zsh-completion
+)
 
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -131,11 +138,10 @@ unsetopt BEEP LIST_BEEP
 # aliases
 alias t=tmux
 alias n=nvim
-alias lg=lazygit
 alias p=python
-alias g=rg
 
 # my directories
+# TODO: put this in another file
 export KDROPOUT=/Users/mtp/Projects/k-dropout
 export DECKBUILDER=/Users/mtp/Projects/deckbuilder
 export GPTCHESS=/Users/mtp/Projects/gpt-chess
@@ -163,3 +169,5 @@ export V100_BOX=ec2-18-235-142-16.compute-1.amazonaws.com
 
 # add scripts
 export PATH=$PATH:/Users/mtp/bin
+
+export LESS="-FR"
