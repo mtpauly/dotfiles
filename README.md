@@ -14,6 +14,7 @@
 - Terminal File Manager: [lf](https://github.com/gokcehan/lf)
 - Mac OS Window Manger: [yabai](https://github.com/koekeishiya/yabai)
 - Mac OS Keybinds: [skhd](https://github.com/koekeishiya/skhd)
+- Mac OS Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 - Mac OS Package Manager: [brew](https://brew.sh/)
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
     - Theme: [Omni](https://github.com/getomni/iterm)
