@@ -18,8 +18,8 @@
 - Editor: [nvim](https://github.com/neovim/neovim)
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
+- Package Manager: [brew](https://brew.sh/)
 - Useful Command Line Tools
-    - Package Manager: [brew](https://brew.sh/)
     - [ripgrep](https://github.com/BurntSushi/ripgrep)
     - [fd](https://github.com/sharkdp/fd)
     - [fzf](https://github.com/junegunn/fzf)
