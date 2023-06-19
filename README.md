@@ -1,5 +1,11 @@
 ## mtp's dotfiles
 
+### Setup Instructions
+
+- Clone this repo to `$HOME/.dotfiles`
+- Run `symlink.sh`
+- Install the relevant requirements
+
 ### Requirements
 
 - Shell: [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
