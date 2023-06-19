@@ -2,9 +2,11 @@
 
 ### Setup Instructions
 
+- Install the relevant requirements
 - Clone this repo to `$HOME/.dotfiles`
 - Run `symlink.sh`
-- Install the relevant requirements
+- Use `bin/` for any scripts you want added to `$PATH`
+- Use `zshrc_private/` for any environment variables and additional configuration. All files in this directory are sourced at the bottom of `.zshrc`
 
 ### Requirements
 
