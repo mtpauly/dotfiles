@@ -19,15 +19,15 @@
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
 - Useful Command Line Tools
+    - Package Manager: [brew](https://brew.sh/)
     - [ripgrep](https://github.com/BurntSushi/ripgrep)
     - [fd](https://github.com/sharkdp/fd)
     - [fzf](https://github.com/junegunn/fzf)
 
 ### Mac Setup
 
-- Package Manager: [brew](https://brew.sh/)
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
-- Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
+    - Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
 - Window Manger: [yabai](https://github.com/koekeishiya/yabai)
 - Keybinds: [skhd](https://github.com/koekeishiya/skhd)
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
