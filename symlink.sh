@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# home
+# files
 ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
 ln -sf $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 ln -sf $HOME/.dotfiles/.yabairc $HOME/.yabairc
@@ -11,6 +11,7 @@ ln -sf $HOME/.dotfiles/.p10k.zsh $HOME/.p10k.zsh
 ln -sf $HOME/.dotfiles/nvim $HOME/.config
 ln -sf $HOME/.dotfiles/tmux $HOME/.config
 
-# bin
+# directories
+ln -sf $HOME/.dotfiles/zshrc_private $HOME/.zshrc_private
 ln -sf $HOME/.dotfiles/bin $HOME
 
