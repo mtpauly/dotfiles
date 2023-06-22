@@ -12,6 +12,7 @@ plugins=(
     conda-zsh-completion
 )
 
+# TODO: figure out whats the deal with these completions and update readme
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
@@ -31,6 +32,7 @@ done
 alias t=tmux
 alias n=nvim
 alias p=python
+alias tms=tmux-sessionizer
 
 # no beep
 unsetopt BEEP LIST_BEEP

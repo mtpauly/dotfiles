@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+tmux new -A -s default -c $HOME
+

@@ -1,0 +1,51 @@
+#!/usr/bin/env zsh
+
+# see: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+
+# select a directory
+if [[ $# -eq 1 ]]; then
+    selected=$1
+
+    if [[ ! -d $selected ]] && [[ ! $selected = "default" ]]; then
+        echo "Directory '$selected' does not exist"
+        exit 1
+    fi
+else
+    opts=default
+    opts=$opts$'\n'$HOME
+    opts=$opts$'\n'$HOME/.dotfiles
+    # TODO: set this up with good defaults
+
+    # TODO: for other dirs:
+    # personal, research, work, school
+
+    selected=$(echo $opts | fzf)
+fi
+
+# exit if nothing selected
+if [[ -z $selected ]]; then
+    exit 1
+fi
+
+# handle "default" separately since it isn't a path
+if [[ $selected = "default" ]]; then
+    selected=$HOME
+    selected_name="default"
+else
+    # TODO: for the main dirs (personal, research, etc) setup nice names
+    selected_name=$(basename $selected | tr . _)
+fi
+
+# if tmux not running, create a new session and attach to it
+if [[ -z $TMUX ]]; then
+    tmux new-session -As $selected_name -c $selected
+    exit 0
+fi
+
+# check if a session with the same name already exists
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+tmux switch-client -t $selected_name
+

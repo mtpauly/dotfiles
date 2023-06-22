@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+sessions=$(tmux ls -F "#{session_name}")
+tmux switch-client -t $(echo $sessions | fzf)
+
