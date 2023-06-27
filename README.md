@@ -11,10 +11,11 @@
 ### Requirements
 
 - Shell: [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
-    - Package Manger: [oh my zsh](https://github.com/ohmyzsh/ohmyzsh)
+    - Shell Config Manger: [oh my zsh](https://github.com/ohmyzsh/ohmyzsh)
         - Suggestions: [autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
         - Highlighting: [syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
         - Command Time: [zsh-command-time](https://github.com/popstas/zsh-command-time)
+        - Additional Completions: [zsh-completions](https://github.com/zsh-users/zsh-completions)
 - Editor: [nvim](https://github.com/neovim/neovim)
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
@@ -23,6 +24,7 @@
     - [ripgrep](https://github.com/BurntSushi/ripgrep)
     - [fd](https://github.com/sharkdp/fd)
     - [fzf](https://github.com/junegunn/fzf)
+    - [lazygit](https://github.com/jesseduffield/lazygit)
 
 ### Mac Setup
 

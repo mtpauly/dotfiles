@@ -12,10 +12,9 @@ plugins=(
     conda-zsh-completion
 )
 
-# TODO: figure out whats the deal with these completions and update readme
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
 source $ZSH/oh-my-zsh.sh
-autoload -U compinit && compinit
+autoload -U compinit && compinit  # required for conda-zsh-completion
 
 # User configuration
 # add scripts
