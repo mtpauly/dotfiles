@@ -28,6 +28,9 @@ for file in $HOME/.zshrc_private/*; do
     fi
 done
 
+# enable fzf completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # aliases
 alias t=tmux
 alias n=nvim
