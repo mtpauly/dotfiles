@@ -11,13 +11,13 @@ if [[ $# -eq 1 ]]; then
         exit 1
     fi
 else
-    opts=default
-    opts=$opts$'\n'$HOME
-    opts=$opts$'\n'$HOME/.dotfiles
-    # TODO: set this up with good defaults
+    opts=default$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d)
 
-    # TODO: for other dirs:
     # personal, research, work, school
+    selected_dirs=("personal" "research" "work" "school")
+    for d in "${selected_dirs[@]}"; do
+        opts=$opts$'\n'$(find ~/$d -mindepth 1 -maxdepth 1 -type d)
+    done
 
     selected=$(echo $opts | fzf)
 fi
@@ -32,8 +32,13 @@ if [[ $selected = "default" ]]; then
     selected=$HOME
     selected_name="default"
 else
-    # TODO: for the main dirs (personal, research, etc) setup nice names
-    selected_name=$(basename $selected | tr . _)
+    # handle selected directories
+    selected_dir=$(echo $selected | sed -r "s#^${HOME}/([^/]+)/.*#\1#")
+    if [[ "${selected_dirs[@]}" == *"$selected_dir"* ]]; then
+        selected_name=$selected_dir/$(basename $selected | tr . _)
+    else
+        selected_name=$(basename $selected | tr . _)
+    fi
 fi
 
 # if tmux not running, create a new session and attach to it
