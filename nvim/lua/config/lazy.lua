@@ -91,6 +91,11 @@ require("lazy").setup({
     { 'mfussenegger/nvim-jdtls' },
 
     { 'eandrju/cellular-automaton.nvim' },
+
+    {
+        "kdheepak/lazygit.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", },
+    },
 }, {
     -- options
     defaults = {

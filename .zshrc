@@ -36,6 +36,7 @@ alias t=tmux
 alias n=nvim
 alias p=python
 alias tms=tmux-sessionizer
+alias lg=lazygit
 
 # no beep
 unsetopt BEEP LIST_BEEP
