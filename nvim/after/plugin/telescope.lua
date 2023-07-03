@@ -15,12 +15,15 @@ require('telescope').setup{
                 ["<C-c>"] = actions.close,
             },
         },
+        -- TODO: figure out how to make this better
+        -- doesn't show the directory structure at all
         path_display = {"smart"},
     },
     extensions = {
         file_browser = {
             hijack_netrw = true,
             mappings = {
+                -- TODO: setup mappings for copy and paste
                 ["i"] = {
                     ["<C-n>"] = fb_actions.create,
                     ["<C-r>"] = fb_actions.rename,
@@ -43,7 +46,9 @@ require('telescope').setup{
         }
     }
 }
+-- TODO: when opening in a horizontal or vertical split we should have the opened window be to the right or bottom
 
+-- TODO: the file browser should start with the first item selected (rather than '..')
 require("telescope").load_extension "file_browser"
 
 vim.keymap.set('n', '<leader>fd', builtin.find_files, {})

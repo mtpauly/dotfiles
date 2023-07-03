@@ -10,6 +10,8 @@ vim.opt.nu = true
 vim.opt.rnu = true
 
 -- tabs
+-- TODO: this should be 2 for js/ts files
+-- maybe in filetype specific config?
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4

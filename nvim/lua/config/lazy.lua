@@ -17,6 +17,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- plugins
 
+    --{ 'catppuccin/nvim', priority = 1000, },
+    --{ 'Shatur/neovim-ayu', priority = 1000, },
+    --{ 'folke/tokyonight.nvim', priority = 1000, },
+    -- TODO: figure out why there are weird/mixed background colors sometimes
     {
         'rebelot/kanagawa.nvim',
         priority = 1000,
@@ -99,6 +103,12 @@ require("lazy").setup({
 
     { "aserowy/tmux.nvim" },
     { "github/copilot.vim" },
+
+    -- TODO: configure code folding (i think treesitter can do this and other code things)
+    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    -- https://github.com/nvim-treesitter/nvim-treesitter#folding
+    -- https://github.com/nvim-lua/kickstart.nvim/blob/8064bb63c5ec973bcd8e114c2984475a77981465/init.lua#L307 
+    -- TODO: key for commenting lines
 }, {
     -- options
     defaults = {
