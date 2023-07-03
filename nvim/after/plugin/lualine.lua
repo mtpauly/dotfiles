@@ -23,7 +23,11 @@ require('lualine').setup {
         lualine_a = {'mode'},
         lualine_b = {
             'branch',
-            'filename',
+            {
+                'filename',
+                newfile_status = true,
+                path = 1,
+            },
         },
         lualine_c = {
             {

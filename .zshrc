@@ -9,7 +9,7 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     command-time
-    conda-zsh-completion
+    #conda-zsh-completion
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
@@ -35,6 +35,7 @@ alias t=tmux
 alias n=nvim
 alias p=python
 alias tms=tmux-sessionizer
+alias tmd=tmux-default
 alias lg=lazygit
 
 # no beep
@@ -48,4 +49,12 @@ ZSH_COMMAND_TIME_MIN_SECONDS=3
 ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
 ZSH_COMMAND_TIME_COLOR="cyan"
 ZSH_COMMAND_TIME_EXCLUDE=(nvim n tmux t)
+
+# TODO: setup shell traps for tmux
+# https://carlosbecker.com/posts/tmux-sessionizer/
+
+
+# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
+
+export AWS_EC2_METADATA_DISABLED=true
 

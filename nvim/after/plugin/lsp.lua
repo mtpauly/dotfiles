@@ -13,6 +13,8 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     -- https://github.com/ThePrimeagen/init.lua/blob/after/plugin/lsp.lua
+
+    -- TODO: goto def (gd) should do center the screen (zz) after
 end)
 
 vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>')
@@ -35,4 +37,6 @@ cmp.setup({
 })
 
 lsp.setup()
+
+-- TODO: there should be some way to check for imports on an existing token (some button to open the lsp window)
 
