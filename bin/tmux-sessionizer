@@ -11,13 +11,17 @@ if [[ $# -eq 1 ]]; then
         exit 1
     fi
 else
-    opts=default$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d)
-
+    opts=default
+    opts=$opts$'\n'$HOME/.dotfiles
     # personal, research, work, school
     selected_dirs=("personal" "research" "work" "school")
     for d in "${selected_dirs[@]}"; do
-        opts=$opts$'\n'$(find ~/$d -mindepth 1 -maxdepth 1 -type d)
+        subdirs=$(find ~/$d -mindepth 1 -maxdepth 1 -type d)
+        if [[ -n $subdirs ]]; then
+            opts=$opts$'\n'$subdirs
+        fi
     done
+    opts=$opts$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*')
 
     selected=$(echo $opts | fzf)
 fi
