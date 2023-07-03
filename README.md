@@ -26,6 +26,8 @@
     - [fzf](https://github.com/junegunn/fzf)
     - [lazygit](https://github.com/jesseduffield/lazygit)
 
+TODO: lf
+
 ### Mac Setup
 
 - Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)

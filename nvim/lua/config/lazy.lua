@@ -98,6 +98,7 @@ require("lazy").setup({
     },
 
     { "aserowy/tmux.nvim" },
+    { "github/copilot.vim" },
 }, {
     -- options
     defaults = {
