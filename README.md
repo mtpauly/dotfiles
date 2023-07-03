@@ -25,6 +25,7 @@
     - [fd](https://github.com/sharkdp/fd)
     - [fzf](https://github.com/junegunn/fzf)
     - [lazygit](https://github.com/jesseduffield/lazygit)
+    - [delta](https://github.com/dandavison/delta)
 
 TODO: lf
 
