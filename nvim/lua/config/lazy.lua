@@ -96,6 +96,8 @@ require("lazy").setup({
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim", },
     },
+
+    { "aserowy/tmux.nvim" },
 }, {
     -- options
     defaults = {
