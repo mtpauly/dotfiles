@@ -1,16 +1,28 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
+link() {
+    local src="$1"
+    local dst="$2"
+
+    if [[ -L $dst ]]; then
+        rm $dst
+    fi
+
+    ln -s $src $dst
+}
 
 # files
-ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
-ln -sf $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
-ln -sf $HOME/.dotfiles/.yabairc $HOME/.yabairc
-ln -sf $HOME/.dotfiles/.skhdrc $HOME/.skhdrc
+link $HOME/.dotfiles/.zshrc $HOME/.zshrc
+link $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
+link $HOME/.dotfiles/.yabairc $HOME/.yabairc
+link $HOME/.dotfiles/.skhdrc $HOME/.skhdrc
 
 # .config
-ln -sf $HOME/.dotfiles/nvim $HOME/.config
-ln -sf $HOME/.dotfiles/tmux $HOME/.config
+link $HOME/.dotfiles/nvim $HOME/.config/nvim
+link $HOME/.dotfiles/tmux $HOME/.config/tmux
+link $HOME/.dotfiles/lazygit $HOME/.config/lazygit
 
 # directories
-ln -sf $HOME/.dotfiles/zshrc_private $HOME/.zshrc_private
-ln -sf $HOME/.dotfiles/bin $HOME
+link $HOME/.dotfiles/zshrc_private $HOME/.zshrc_private
+link $HOME/.dotfiles/bin $HOME/bin
 
