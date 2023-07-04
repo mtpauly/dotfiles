@@ -53,8 +53,3 @@ ZSH_COMMAND_TIME_EXCLUDE=(nvim n tmux t)
 # TODO: setup shell traps for tmux
 # https://carlosbecker.com/posts/tmux-sessionizer/
 
-
-# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
-
-export AWS_EC2_METADATA_DISABLED=true
-
