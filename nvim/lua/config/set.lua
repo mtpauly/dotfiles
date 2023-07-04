@@ -46,3 +46,7 @@ vim.opt.updatetime = 50
 -- don't continue comments on the next line
 vim.cmd([[autocmd BufEnter,BufNewFile,BufRead * set formatoptions-=cro]])
 
+-- switch colon and semicolon
+vim.keymap.set('n', ';', ':', { noremap = true })
+vim.keymap.set('n', ':', ';', { noremap = true })
+
