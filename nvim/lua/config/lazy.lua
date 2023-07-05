@@ -105,6 +105,7 @@ require("lazy").setup({
     { "github/copilot.vim" },
     { "chentoast/marks.nvim" },
     { "numToStr/Comment.nvim" },
+    { "lukas-reineke/indent-blankline.nvim" },
 
     -- TODO: configure code folding (i think treesitter can do this and other code things)
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
