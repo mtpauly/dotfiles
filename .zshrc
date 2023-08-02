@@ -35,7 +35,7 @@ alias t=tmux
 alias n=nvim
 alias p=python
 alias tms=tmux-sessionizer
-alias tmd=tmux-default
+alias tmd="tmux-sessionizer default"
 alias lg=lazygit
 
 # no beep
@@ -50,6 +50,11 @@ ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
 ZSH_COMMAND_TIME_COLOR="cyan"
 ZSH_COMMAND_TIME_EXCLUDE=(nvim n tmux t)
 
-# TODO: setup shell traps for tmux
-# https://carlosbecker.com/posts/tmux-sessionizer/
+# setup shell traps for tmux
+# only traps when shell is interactive
+[[ -n $PS1 ]] && trap "test -n $TMUX && test $(tmux list-panes | wc -l) -eq 1 && test $(tmux list-windows | wc -l) -eq 1 && tmux-sessionizer default" 0
+
+# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
+
+export AWS_EC2_METADATA_DISABLED=true
 
