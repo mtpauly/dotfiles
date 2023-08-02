@@ -1,9 +1,18 @@
 local lsp = require('lsp-zero')
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_action = lsp.cmp_action()
 
-lsp.preset('recommended')
-lsp.nvim_workspace() -- Fix Undefined global 'vim'
+require('luasnip.loaders.from_vscode').lazy_load()
+
+lsp.preset({
+    name = 'recommended',
+    manage_nvim_cmp = {
+        set_sources = false,
+        set_basic_mappings = false,
+        set_extra_mappings = false,
+        use_luasnip = true,
+    }
+})
 
 lsp.on_attach(function(client, bufnr)
     -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#default_keymapsopts
@@ -13,30 +22,48 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     -- https://github.com/ThePrimeagen/init.lua/blob/after/plugin/lsp.lua
-
-    -- TODO: goto def (gd) should do center the screen (zz) after
 end)
 
-vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>')
-vim.keymap.set('n', '<leader>ll', '<cmd>LspLog<cr>')
+lsp.nvim_workspace() -- Fix Undefined global 'vim'
+lsp.skip_server_setup({'jdtls'})
+lsp.setup()
 
 -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/autocomplete.md#introduction
+-- TODO: show suggestions when instantiating a class or calling a function
 cmp.setup({
-    sources = {
-        {name = 'nvim_lsp'},
-    },
     mapping = {
-        ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-j>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            else
+                cmp.complete()
+            end
+        end),
+        ['<C-k>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            else
+                cmp.complete()
+            end
+        end),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        -- TODO: figure out why these are not being unbound
-        -- prime does something a little bit different
-        ['<Tab>'] = nil,
-        ['<S-Tab>'] = nil,
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-n>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-p>'] = cmp_action.luasnip_jump_backward(),
+    },
+    sources = {
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        -- TODO: figure this out
+        -- { name = 'copilot' },
+        { name = 'path' },
+        { name = 'luasnip', show_autosnippets = true },
+        { name = 'buffer', keyword_length = 5 },
     },
 })
 
-lsp.setup()
-
--- TODO: there should be some way to check for imports on an existing token (some button to open the lsp window)
+vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>')
+vim.keymap.set('n', '<leader>ll', '<cmd>LspLog<cr>')
 

@@ -10,31 +10,31 @@ vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true,
 -- start disabled
 -- TODO:
 
-vim.api.nvim_set_keymap(
-    "n",
-    "<space>cs",
-    ":Copilot status<CR>",
-    { noremap = true }
-)
-
-vim.api.nvim_set_keymap(
-    "n",
-    "<space>cp",
-    ":Copilot panel<CR>",
-    { noremap = true }
-)
-
-vim.api.nvim_set_keymap(
-    "n",
-    "<space>cd",
-    ":Copilot disable<CR>",
-    { noremap = true }
-)
-
-vim.api.nvim_set_keymap(
-    "n",
-    "<space>ce",
-    ":Copilot enable<CR>",
-    { noremap = true }
-)
+-- vim.api.nvim_set_keymap(
+--     "n",
+--     "<space>cs",
+--     ":Copilot status<CR>",
+--     { noremap = true }
+-- )
+--
+-- vim.api.nvim_set_keymap(
+--     "n",
+--     "<space>cp",
+--     ":Copilot panel<CR>",
+--     { noremap = true }
+-- )
+--
+-- vim.api.nvim_set_keymap(
+--     "n",
+--     "<space>cd",
+--     ":Copilot disable<CR>",
+--     { noremap = true }
+-- )
+--
+-- vim.api.nvim_set_keymap(
+--     "n",
+--     "<space>ce",
+--     ":Copilot enable<CR>",
+--     { noremap = true }
+-- )
 

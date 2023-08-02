@@ -47,3 +47,4 @@ vim.keymap.set("n", "Q", "<nop>")
 -- make file executable
 --vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- TODO: command for searching (normal search) for the selected token

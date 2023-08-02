@@ -10,8 +10,6 @@ vim.opt.nu = true
 vim.opt.rnu = true
 
 -- tabs
--- TODO: this should be 2 for js/ts files
--- maybe in filetype specific config?
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -49,4 +47,11 @@ vim.cmd([[autocmd BufEnter,BufNewFile,BufRead * set formatoptions-=cro]])
 -- switch colon and semicolon
 vim.keymap.set('n', ';', ':', { noremap = true })
 vim.keymap.set('n', ':', ';', { noremap = true })
+
+-- code folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
+-- TODO: set additional fold options
+-- https://neovim.io/doc/user/fold.html#fold-commands
 
