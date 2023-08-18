@@ -1,19 +1,8 @@
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-    {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-    {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-    {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-    {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-    {silent = true, noremap = true}
-)
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-    {silent = true, noremap = true}
-)
+local opts = { silent = true, noremap = true }
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, opts)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end, opts)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end, opts)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end, opts)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end, opts)
+vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end, opts)
 

@@ -56,6 +56,9 @@ require("lazy").setup({
     {
         'folke/trouble.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
+        opts = {
+            padding = false,
+        },
     },
     {
         'folke/todo-comments.nvim',
