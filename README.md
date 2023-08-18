@@ -37,3 +37,7 @@ TODO: lf
 - Keybinds: [skhd](https://github.com/koekeishiya/skhd)
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 
+### `neovim` Setup
+
+TODO: give overview
+
