@@ -41,10 +41,11 @@ require("lazy").setup({
         build = ':TSUpdate',
     },
     { 'nvim-treesitter/nvim-treesitter-context' },
-    {
-        'nvim-telescope/telescope-file-browser.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
-    },
+    -- now using lf instead, but this is still nice
+    -- {
+    --     'nvim-telescope/telescope-file-browser.nvim',
+    --     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
+    -- },
     { 'nvim-tree/nvim-web-devicons' },
     { 'ThePrimeagen/harpoon' },
 
@@ -111,6 +112,13 @@ require("lazy").setup({
     -- { "github/copilot.vim" },
     { "numToStr/Comment.nvim" },
     { "lukas-reineke/indent-blankline.nvim" },
+
+    {
+        "lmburns/lf.nvim",
+        dependencies = {
+            "akinsho/toggleterm.nvim",
+        }
+    }
 }, {
     -- options
     defaults = {

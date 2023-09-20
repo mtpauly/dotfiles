@@ -1,0 +1,66 @@
+set icons
+
+# fuzzy searching
+set incfilter true
+set globsearch true
+
+map a %{{ lf_filter_helper $id a }}
+map b %{{ lf_filter_helper $id b }}
+map c %{{ lf_filter_helper $id c }}
+map d %{{ lf_filter_helper $id d }}
+map e %{{ lf_filter_helper $id e }}
+map f %{{ lf_filter_helper $id f }}
+map g %{{ lf_filter_helper $id g }}
+map h %{{ lf_filter_helper $id h }}
+map i %{{ lf_filter_helper $id i }}
+map j %{{ lf_filter_helper $id j }}
+map k %{{ lf_filter_helper $id k }}
+map l %{{ lf_filter_helper $id l }}
+map m %{{ lf_filter_helper $id m }}
+map n %{{ lf_filter_helper $id n }}
+map o %{{ lf_filter_helper $id o }}
+map p %{{ lf_filter_helper $id p }}
+map q %{{ lf_filter_helper $id q }}
+map r %{{ lf_filter_helper $id r }}
+map s %{{ lf_filter_helper $id s }}
+map t %{{ lf_filter_helper $id t }}
+map u %{{ lf_filter_helper $id u }}
+map v %{{ lf_filter_helper $id v }}
+map w %{{ lf_filter_helper $id w }}
+map x %{{ lf_filter_helper $id x }}
+map y %{{ lf_filter_helper $id y }}
+map z %{{ lf_filter_helper $id z }}
+
+map <backspace2> %{{ # not exactly sure why this is backspace2, but this works
+    touch /tmp/lf_filter_$id
+    new_filter=$(echo $(cat /tmp/lf_filter_$id) | sed -r "s/(.*)./\1/")
+    echo $new_filter > /tmp/lf_filter_$id
+    lf -remote "send $id setfilter *$new_filter*"
+    printf "current filter: $new_filter"
+}}
+
+# action binds
+map <esc> quit
+map <c-c> quit
+
+map <c-k> up
+map <c-j> down
+cmd updir_fzf %{{
+    echo "" > /tmp/lf_filter_$id
+    lf -remote "send $id setfilter"
+    lf -remote "send $id updir"
+}}
+cmd open_fzf %{{
+    echo "" > /tmp/lf_filter_$id
+    lf -remote "send $id setfilter"
+    lf -remote "send $id open"
+}}
+map <c-h> updir_fzf
+map <backspace> updir_fzf # for some reason c-h is sending backspace
+map <c-l> open_fzf
+map <enter> open_fzf
+
+map <c-z>h set hidden!
+map <c-z>s set info size!
+map <c-z>t set info time!
+

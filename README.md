@@ -16,8 +16,9 @@
         - Highlighting: [syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
         - Command Time: [zsh-command-time](https://github.com/popstas/zsh-command-time)
         - Additional Completions: [zsh-completions](https://github.com/zsh-users/zsh-completions)
-- Editor: [nvim](https://github.com/neovim/neovim)
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
+- Editor: [nvim](https://github.com/neovim/neovim)
+- File Browser: [lf](https://pkg.go.dev/github.com/gokcehan/lf)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
 - Package Manager: [brew](https://brew.sh/)
 - Useful Command Line Tools
@@ -26,8 +27,6 @@
     - [fzf](https://github.com/junegunn/fzf)
     - [lazygit](https://github.com/jesseduffield/lazygit)
     - [delta](https://github.com/dandavison/delta)
-
-TODO: lf
 
 ### Mac Setup
 
