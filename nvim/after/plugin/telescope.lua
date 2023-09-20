@@ -1,5 +1,5 @@
 local actions = require('telescope.actions')
-local fb_actions = require "telescope".extensions.file_browser.actions
+-- local fb_actions = require "telescope".extensions.file_browser.actions
 local builtin = require('telescope.builtin')
 
 require('telescope').setup{
@@ -19,37 +19,35 @@ require('telescope').setup{
         -- doesn't show the directory structure at all
         path_display = {"smart"},
     },
-    extensions = {
-        file_browser = {
-            hijack_netrw = true,
-            mappings = {
-                -- TODO: setup mappings for copy and paste
-                ["i"] = {
-                    ["<C-n>"] = fb_actions.create,
-                    ["<C-r>"] = fb_actions.rename,
-                    ["<C-m>"] = fb_actions.move,
-                    ["<C-x>"] = fb_actions.remove,
-                    ["<C-h>"] = fb_actions.backspace,
-                    ["<C-l>"] = actions.select_default,
-                    ["<CR>"] = actions.select_default,
-                },
-                ["n"] = {
-                    ["<C-n>"] = fb_actions.create,
-                    ["<C-r>"] = fb_actions.rename,
-                    ["<C-m>"] = fb_actions.move,
-                    ["<C-x>"] = fb_actions.remove,
-                    ["<C-h>"] = fb_actions.backspace,
-                    ["<C-l>"] = actions.select_default,
-                    ["<CR>"] = actions.select_default,
-                },
-            }
-        }
-    }
+    -- extensions = {
+    --     file_browser = {
+    --         hijack_netrw = true,
+    --         mappings = {
+    --             -- TODO: setup mappings for copy and paste
+    --             ["i"] = {
+    --                 ["<C-n>"] = fb_actions.create,
+    --                 ["<C-r>"] = fb_actions.rename,
+    --                 ["<C-m>"] = fb_actions.move,
+    --                 ["<C-x>"] = fb_actions.remove,
+    --                 ["<C-h>"] = fb_actions.backspace,
+    --                 ["<C-l>"] = actions.select_default,
+    --                 ["<CR>"] = actions.select_default,
+    --             },
+    --             ["n"] = {
+    --                 ["<C-n>"] = fb_actions.create,
+    --                 ["<C-r>"] = fb_actions.rename,
+    --                 ["<C-m>"] = fb_actions.move,
+    --                 ["<C-x>"] = fb_actions.remove,
+    --                 ["<C-h>"] = fb_actions.backspace,
+    --                 ["<C-l>"] = actions.select_default,
+    --                 ["<CR>"] = actions.select_default,
+    --             },
+    --         }
+    --     }
+    -- }
 }
--- TODO: when opening in a horizontal or vertical split we should have the opened window be to the right or bottom
 
--- TODO: the file browser should start with the first item selected (rather than '..')
-require("telescope").load_extension "file_browser"
+-- require("telescope").load_extension "file_browser"
 
 vim.keymap.set('n', '<leader>fd', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})

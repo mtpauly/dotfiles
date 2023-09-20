@@ -33,7 +33,8 @@ done
 # aliases
 alias t=tmux
 alias n=nvim
-alias p=python
+alias v=nvim
+alias p=python3
 alias tms=tmux-sessionizer
 alias tmd="tmux-sessionizer default"
 alias lg=lazygit
@@ -48,7 +49,7 @@ export LESS="-FR"
 ZSH_COMMAND_TIME_MIN_SECONDS=3
 ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
 ZSH_COMMAND_TIME_COLOR="cyan"
-ZSH_COMMAND_TIME_EXCLUDE=(nvim n tmux t)
+ZSH_COMMAND_TIME_EXCLUDE=(nvim n v tmux t lf)
 
 # setup shell traps for tmux
 # only traps when shell is interactive
