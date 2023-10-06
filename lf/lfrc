@@ -60,7 +60,40 @@ map <backspace> updir_fzf # for some reason c-h is sending backspace
 map <c-l> open_fzf
 map <enter> open_fzf
 
+# selection
+map <esc> %{{
+    echo "" > /tmp/lf_filter_$id
+    lf -remote "send $id setfilter"
+    lf -remote "send $id unselect"
+    lf -remote "send $id clear"
+}}
+map <tab> invert # c-i is sending tab
+
+# file actions
+cmd new-file %{{
+    set -f
+    printf "Enter file path(s): "
+    read input
+    for name in $input; do
+        echo $name
+        if [[ "$name" == */ ]]; then
+            mkdir -p $name
+        else
+            touch $name
+        fi
+    done
+}}
+map <c-n> new-file
+
+map <c-d> delete
+map <c-y> copy
+map <c-x> cut
+map <c-p> paste
+
+# config actions
 map <c-z>h set hidden!
 map <c-z>s set info size!
 map <c-z>t set info time!
 
+# color previews
+set previewer bat-color
