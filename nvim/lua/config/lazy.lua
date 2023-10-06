@@ -109,7 +109,6 @@ require("lazy").setup({
     },
 
     { "aserowy/tmux.nvim" },
-    -- { "github/copilot.vim" },
     { "numToStr/Comment.nvim" },
     { "lukas-reineke/indent-blankline.nvim" },
 
@@ -118,7 +117,9 @@ require("lazy").setup({
         dependencies = {
             "akinsho/toggleterm.nvim",
         }
-    }
+    },
+
+    { "zbirenbaum/copilot.lua" },
 }, {
     -- options
     defaults = {
