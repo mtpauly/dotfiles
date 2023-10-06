@@ -27,6 +27,7 @@
     - [fzf](https://github.com/junegunn/fzf)
     - [lazygit](https://github.com/jesseduffield/lazygit)
     - [delta](https://github.com/dandavison/delta)
+    - [bat](https://github.com/sharkdp/bat)
 
 ### Mac Setup
 
