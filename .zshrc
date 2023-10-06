@@ -53,7 +53,7 @@ ZSH_COMMAND_TIME_EXCLUDE=(nvim n v tmux t lf)
 
 # setup shell traps for tmux
 # only traps when shell is interactive
-[[ -n $PS1 ]] && trap "test -n $TMUX && test $(tmux list-panes | wc -l) -eq 1 && test $(tmux list-windows | wc -l) -eq 1 && tmux-sessionizer default" 0
+# [[ -n $PS1 ]] && trap "test -n $TMUX && test $(tmux list-panes | wc -l) -eq 1 && test $(tmux list-windows | wc -l) -eq 1 && tmux-sessionizer default" 0
 
 # if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
 
