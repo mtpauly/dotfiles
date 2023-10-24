@@ -17,20 +17,24 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- plugins
 
-    --{ 'catppuccin/nvim', priority = 1000, },
-    --{ 'Shatur/neovim-ayu', priority = 1000, },
-    --{ 'folke/tokyonight.nvim', priority = 1000, },
     {
-        'rebelot/kanagawa.nvim',
+        'catppuccin/nvim',
         priority = 1000,
         init = function()
-            vim.cmd.colorscheme('kanagawa-wave')
+            vim.cmd.colorscheme('catppuccin-mocha')
         end,
     },
+    -- {
+    --     'rebelot/kanagawa.nvim',
+    --     priority = 1000,
+    --     init = function()
+    --         vim.cmd.colorscheme('kanagawa-wave')
+    --     end,
+    -- },
     { 'nvim-lualine/lualine.nvim' },
 
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
     {
@@ -95,6 +99,9 @@ require("lazy").setup({
             {'L3MON4D3/LuaSnip'},     -- Required
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-vsnip' },
+            { 'hrsh7th/vim-vsnip' },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'saadparwaiz1/cmp_luasnip' },
             { "rafamadriz/friendly-snippets" }
         }
