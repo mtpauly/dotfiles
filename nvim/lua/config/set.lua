@@ -17,7 +17,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- no line wrapping
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- long term undos
 vim.opt.swapfile = false
@@ -54,4 +54,8 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 -- TODO: set additional fold options
 -- https://neovim.io/doc/user/fold.html#fold-commands
+
+-- split below and right
+vim.o.splitright = true
+vim.o.splitbelow = true
 
