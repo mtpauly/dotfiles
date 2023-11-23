@@ -21,17 +21,21 @@
 - File Browser: [lf](https://pkg.go.dev/github.com/gokcehan/lf)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
 - Package Manager: [brew](https://brew.sh/)
-- Useful Command Line Tools
-    - [ripgrep](https://github.com/BurntSushi/ripgrep)
-    - [fd](https://github.com/sharkdp/fd)
-    - [fzf](https://github.com/junegunn/fzf)
-    - [lazygit](https://github.com/jesseduffield/lazygit)
-    - [delta](https://github.com/dandavison/delta)
-    - [bat](https://github.com/sharkdp/bat)
+
+#### Useful Command Line Tools
+
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [fzf](https://github.com/junegunn/fzf)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [delta](https://github.com/dandavison/delta)
+- [bat](https://github.com/sharkdp/bat)
 
 ### Mac Setup
 
-- Terminal Emulator: [iterm2](https://github.com/gnachman/iTerm2)
+# TODO: kitty
+
+- Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
 - Window Manger: [yabai](https://github.com/koekeishiya/yabai)
 - Keybinds: [skhd](https://github.com/koekeishiya/skhd)
