@@ -17,20 +17,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- plugins
 
-    {
-        'catppuccin/nvim',
-        priority = 1000,
-        init = function()
-            vim.cmd.colorscheme('catppuccin-mocha')
-        end,
-    },
-    -- {
-    --     'rebelot/kanagawa.nvim',
-    --     priority = 1000,
-    --     init = function()
-    --         vim.cmd.colorscheme('kanagawa-wave')
-    --     end,
-    -- },
+    { 'Shatur/neovim-ayu' },
+    { 'catppuccin/nvim' },
+    { 'rebelot/kanagawa.nvim' },
+
     { 'nvim-lualine/lualine.nvim' },
 
     {
@@ -45,7 +35,7 @@ require("lazy").setup({
         build = ':TSUpdate',
     },
     { 'nvim-treesitter/nvim-treesitter-context' },
-    -- now using lf instead, but this is still nice
+    -- NOTE: now using lf instead, but this is still nice
     -- {
     --     'nvim-telescope/telescope-file-browser.nvim',
     --     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
