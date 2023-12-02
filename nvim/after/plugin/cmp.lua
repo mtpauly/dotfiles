@@ -33,13 +33,36 @@ cmp.setup({
         ['<C-p>'] = cmp_action.luasnip_jump_backward(),
     },
 
+    -- TODO: order the sources such that lsp comes first in the suggestions (currently doesn't always)
     sources = {
-        { name = 'nvim_lsp', keyword_length = 3 },
+        { name = 'nvim_lsp', keyword_length = 2 },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'nvim_lua' , keyword_length = 3 },
-        { name = 'buffer', keyword_length = 3 },
+        { name = 'nvim_lua' , keyword_length = 2 },
+        { name = 'buffer', keyword_length = 2 },
         { name = 'path' },
         { name = 'luasnip', show_autosnippets = true },
-        { name = 'vsnip', keyword_length = 3 },
+        { name = 'vsnip', keyword_length = 2 },
+    },
+
+    -- TODO: why is this not working?? print statements not showing up...
+    formatting = {
+        fields = {'menu', 'abbr', 'kind'},
+        format = function(entry, item)
+            print('running formatting function...')
+            local menu_icon = {
+                nvim_lsp = 'λ',
+                luasnip = '⋗',
+                buffer = 'Ω',
+                path = '🖫',
+                nvim_lua = 'Π',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+        end,
+    },
+
+    preselect = 'item',
+    completion = {
+        completeopt = 'menu,menuone,noinsert'
     },
 })
