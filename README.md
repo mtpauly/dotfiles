@@ -30,10 +30,9 @@
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [delta](https://github.com/dandavison/delta)
 - [bat](https://github.com/sharkdp/bat)
+- [tldr](https://tldr.sh/)
 
 ### Mac Setup
-
-# TODO: kitty
 
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
