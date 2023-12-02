@@ -17,11 +17,10 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit  # required for conda-zsh-completion
 
 # User configuration
-# add scripts
+# TODO: is this the appropriate place for this configuration
 export PATH=$PATH:$HOME/bin
-
-# add kitty to path
 export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
+export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
 
 # source private config
 for file in $HOME/.zshrc_private/*; do

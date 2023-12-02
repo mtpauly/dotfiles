@@ -13,8 +13,7 @@ if [[ $# -eq 1 ]]; then
 else
     opts=default
     opts=$opts$'\n'$HOME/.dotfiles
-    # personal, research, work, school
-    selected_dirs=("personal" "research" "work" "school")
+    selected_dirs=("personal" "research" "work" "school" "Documents" "Downloads")
     for d in "${selected_dirs[@]}"; do
         subdirs=$(find ~/$d -mindepth 1 -maxdepth 1 -type d)
         if [[ -n $subdirs ]]; then
