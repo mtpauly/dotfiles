@@ -35,18 +35,15 @@ require("lazy").setup({
         build = ':TSUpdate',
     },
     { 'nvim-treesitter/nvim-treesitter-context' },
-    -- NOTE: now using lf instead, but this is still nice
-    -- {
-    --     'nvim-telescope/telescope-file-browser.nvim',
-    --     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
-    -- },
     { 'nvim-tree/nvim-web-devicons' },
-    { 'ThePrimeagen/harpoon' },
 
+    { 'ThePrimeagen/harpoon' },
     { 'tpope/vim-surround' },
     { 'tpope/vim-fugitive' },
     { 'mbbill/undotree' },
     { 'lewis6991/gitsigns.nvim' },
+    { "numToStr/Comment.nvim" },
+    { "lukas-reineke/indent-blankline.nvim" },
 
     {
         'folke/trouble.nvim',
@@ -73,7 +70,7 @@ require("lazy").setup({
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
         dependencies = {
-            -- LSP Support
+            -- lsp
             {'neovim/nvim-lspconfig'},             -- Required
             {                                      -- Optional
                 'williamboman/mason.nvim',
@@ -82,8 +79,7 @@ require("lazy").setup({
                 end,
             },
             {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-            -- Autocompletion
+            -- autocomplete
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
             {'L3MON4D3/LuaSnip'},     -- Required
@@ -96,19 +92,23 @@ require("lazy").setup({
             { "rafamadriz/friendly-snippets" }
         }
     },
-    { 'mfussenegger/nvim-jdtls' },
+    { 'lvimuser/lsp-inlayhints.nvim' },
 
-    { 'eandrju/cellular-automaton.nvim' },
+    -- language-specific plugins
+    { 'mfussenegger/nvim-jdtls' },
+    -- { 'simrat39/rust-tools.nvim' },
+
+    -- debugging
+    { 'mfussenegger/nvim-dap' },
+    { 'rcarriga/nvim-dap-ui' },
+    { 'theHamsta/nvim-dap-virtual-text' },
+    { 'nvim-telescope/telescope-dap.nvim' },
 
     {
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim", },
     },
-
     { "aserowy/tmux.nvim" },
-    { "numToStr/Comment.nvim" },
-    { "lukas-reineke/indent-blankline.nvim" },
-
     {
         "lmburns/lf.nvim",
         dependencies = {
@@ -117,8 +117,11 @@ require("lazy").setup({
     },
 
     { "zbirenbaum/copilot.lua" },
+
+    { 'eandrju/cellular-automaton.nvim' },
 }, {
     -- options
+
     defaults = {
         lazy = false,
         version = false,

@@ -1,3 +1,4 @@
+-- TODO: need to pick a new key for accepting as C-y is already used for autocomplete accept
 require("copilot").setup({
     panel = {
         enabled = true,
