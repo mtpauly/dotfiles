@@ -1,4 +1,3 @@
--- TODO: need to pick a new key for accepting as C-y is already used for autocomplete accept
 require("copilot").setup({
     panel = {
         enabled = true,
@@ -18,7 +17,7 @@ require("copilot").setup({
         keymap = {
             prev = "<C-p>",
             next = "<C-n>",
-            accept = "<C-y>",
+            accept = "<C-f>",
         },
     },
     filetypes = {
@@ -36,7 +35,14 @@ require("copilot").setup({
 
 vim.cmd("silent Copilot disable") -- start disabled
 
-vim.api.nvim_set_keymap("n", "<space>cs", ":Copilot status<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<space>cp", ":Copilot panel<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<space>cd", ":Copilot disable<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<space>ce", ":Copilot enable<CR>", { noremap = true })
+local wk = require("which-key")
+vim.api.nvim_set_keymap("n", "<leader>cs", ":Copilot status<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>cp", ":Copilot panel<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>cd", ":Copilot disable<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>ce", ":Copilot enable<CR>", { noremap = true })
+wk.register({
+    s = ":Copilot status",
+    p = ":Copilot panel",
+    d = ":Copilot disable",
+    e = ":Copilot enable",
+}, { prefix = "<leader>c" })
