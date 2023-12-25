@@ -20,6 +20,7 @@ require("lazy").setup({
     { 'Shatur/neovim-ayu' },
     { 'catppuccin/nvim' },
     { 'rebelot/kanagawa.nvim' },
+    { 'sainnhe/gruvbox-material' },
 
     { 'nvim-lualine/lualine.nvim' },
 
@@ -115,6 +116,8 @@ require("lazy").setup({
             "akinsho/toggleterm.nvim",
         }
     },
+
+    { 'lervag/vimtex' },
 
     { "zbirenbaum/copilot.lua" },
 
