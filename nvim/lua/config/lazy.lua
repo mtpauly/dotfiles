@@ -105,10 +105,6 @@ require("lazy").setup({
     { 'theHamsta/nvim-dap-virtual-text' },
     { 'nvim-telescope/telescope-dap.nvim' },
 
-    {
-        "kdheepak/lazygit.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", },
-    },
     { "aserowy/tmux.nvim" },
     {
         "lmburns/lf.nvim",
