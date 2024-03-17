@@ -44,3 +44,8 @@
 
 TODO: give overview
 
+### When yabai breaks
+
+Some features of yabai break when updating your MacOS version and requires some manual steps to fix.
+
+Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(from-HEAD)#updating-to-latest-head) to update to the latest version and reconfigure the scripting addition.
