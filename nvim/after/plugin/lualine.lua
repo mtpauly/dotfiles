@@ -47,7 +47,7 @@ require('lualine').setup {
         lualine_z = {
             {
                 'location',
-                padding = 0,
+                padding = 1,
             },
             '%L',
     }
