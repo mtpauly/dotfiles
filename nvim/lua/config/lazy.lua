@@ -64,7 +64,9 @@ require("lazy").setup({
             vim.o.timeout = true
             vim.o.timeoutlen = 1000
         end,
-        opts = {}
+        opts = {
+            triggers_nowait = {},  -- disable showing marks instantly
+        }
     },
 
     {
