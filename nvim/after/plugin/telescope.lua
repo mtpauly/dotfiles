@@ -33,7 +33,8 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {}) -- "find grep"
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {}) -- "find buffers"
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {}) -- "find help"
 vim.keymap.set('n', '<leader>fp', builtin.diagnostics, {}) -- "find problems"
-vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {}) -- "find references" -- TODO: this doesn't appear to be working
+vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {}) -- "find references"
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {}) -- "find keymaps"
 wk.register({
     f = {
         d = 'telescope.builtin.find_files',
@@ -42,5 +43,6 @@ wk.register({
         h = 'telescope.builtin.help_tags',
         p = 'telescope.builtin.diagnostics',
         r = 'telescope.builtin.lsp_references',
+        k = 'telescope.builtin.keymaps',
     },
 }, { prefix = '<leader>' })
