@@ -40,6 +40,8 @@ alias p=python3
 alias tms=tmux-sessionizer
 alias tmd="tmux-sessionizer default"
 alias lg=lazygit
+alias ghs="gh copilot suggest" # https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli
+alias ghe="gh copilot explain"
 
 # no beep
 unsetopt BEEP LIST_BEEP

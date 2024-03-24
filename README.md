@@ -31,6 +31,7 @@
 - [delta](https://github.com/dandavison/delta)
 - [bat](https://github.com/sharkdp/bat)
 - [tldr](https://tldr.sh/)
+- [gh](https://github.com/cli/cli)
 
 ### Mac Setup
 
