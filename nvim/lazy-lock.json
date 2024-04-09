@@ -11,6 +11,7 @@
   "copilot.lua": { "branch": "master", "commit": "1a8032ae496916ccc7a7a52ee79194fbef29f462" },
   "friendly-snippets": { "branch": "main", "commit": "377d45475b49e37460a902d6d569d2093d4037d0" },
   "gitsigns.nvim": { "branch": "main", "commit": "3ef12dfdc293969fac736a7a580d6ae1f57ea406" },
+  "gruvbox-material": { "branch": "master", "commit": "7f56d9f9c4860df528031539d321a61f6e081dee" },
   "harpoon": { "branch": "master", "commit": "c1aebbad9e3d13f20bedb8f2ce8b3a94e39e424a" },
   "indent-blankline.nvim": { "branch": "master", "commit": "9637670896b68805430e2f72cf5d16be5b97a22a" },
   "kanagawa.nvim": { "branch": "master", "commit": "c19b9023842697ec92caf72cd3599f7dd7be4456" },
@@ -45,5 +46,6 @@
   "vim-fugitive": { "branch": "master", "commit": "43f18ab9155c853a84ded560c6104e6300ad41da" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-vsnip": { "branch": "master", "commit": "be277461265f1e5c7db470aa479f30956597ea9e" },
+  "vimtex": { "branch": "master", "commit": "6179414f2eb3db977a513b7b19c23e7e62a0f388" },
   "which-key.nvim": { "branch": "main", "commit": "d871f2b664afd5aed3dc1d1573bef2fb24ce0484" }
 }
