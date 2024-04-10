@@ -113,10 +113,10 @@ require("lazy").setup({
 
     { "aserowy/tmux.nvim" },
     {
-        "lmburns/lf.nvim",
-        dependencies = {
-            "akinsho/toggleterm.nvim",
-        }
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
     { 'lervag/vimtex' },
