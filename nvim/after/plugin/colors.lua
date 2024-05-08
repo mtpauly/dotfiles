@@ -6,6 +6,11 @@ require('ayu').setup({
     },
 })
 
+require('onedark').setup({
+    style = 'darker', -- dark, darker, cool, deep, warm, warmer, light
+    toggle_style_key = '<leader>n',
+})
+
 -- https://github.com/rebelot/kanagawa.nvim?tab=readme-ov-file
 -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
 -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua

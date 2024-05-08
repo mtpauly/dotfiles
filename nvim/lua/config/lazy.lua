@@ -21,6 +21,8 @@ require("lazy").setup({
     { 'catppuccin/nvim' },
     { 'rebelot/kanagawa.nvim' },
     { 'sainnhe/gruvbox-material' },
+    { 'navarasu/onedark.nvim' },
+    { 'rose-pine/neovim' },
 
     { 'nvim-lualine/lualine.nvim' },
 
