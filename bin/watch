@@ -10,9 +10,9 @@ from typing import List
 from datetime import datetime, timedelta, timezone
 
 
-# TODO: setup for different filetypes
 FILETYPE_COMMANDS = {
     ".py": "python3",
+    ".go": "go run",
 }
 
 COMMAND_REPEAT_TIME = 0.1
