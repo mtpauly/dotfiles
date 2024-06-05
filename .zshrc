@@ -8,8 +8,6 @@ plugins=(
     vi-mode
     zsh-syntax-highlighting
     zsh-autosuggestions
-    command-time
-    #conda-zsh-completion
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
