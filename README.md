@@ -38,6 +38,7 @@
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://archlinux.org/packages/extra/any/ttf-firacode-nerd/)
 - Window Manager: [sway](https://swaywm.org/)
+    - Brightness: [brightnessctl](https://github.com/Hummer12007/brightnessctl)
     - Status Bar: [i3status](https://man.archlinux.org/man/i3status.1)
 - Keyboard Customizer: [keyd](https://github.com/rvaiya/keyd)
 
