@@ -41,6 +41,13 @@
 - Keybinds: [skhd](https://github.com/koekeishiya/skhd)
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 
+### Linux Setup
+
+- Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
+    - Font: [FiraCode Nerd Font](https://archlinux.org/packages/extra/any/ttf-firacode-nerd/)
+- Window Manager: [sway](https://swaywm.org/)
+- Keyboard Customizer: [keyd](https://github.com/rvaiya/keyd)
+
 ### `neovim` Setup
 
 TODO: give overview
