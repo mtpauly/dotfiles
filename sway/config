@@ -19,8 +19,19 @@ default_border pixel 2
 
 # Brightness
 
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+
+# Volume
+
+exec_always pactl set-sink-volume @DEFAULT_SINK@ 0%
+exec_always pactl set-sink-mute @DEFAULT_SINK@ 1
+
+# exec_always pactl set-sink-volume @DEFAULT_SINK@ 0%
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ 1
 
 ### Variables
 #
