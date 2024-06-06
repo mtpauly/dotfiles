@@ -43,9 +43,9 @@
     - Brightness: [brightnessctl](https://github.com/Hummer12007/brightnessctl)
     - Status Bar: [i3status](https://man.archlinux.org/man/i3status.1)
 - Audio: [pipewire](https://wiki.archlinux.org/title/PipeWire)
-    - GUI: (pavucontrol)[https://archlinux.org/packages/extra/x86_64/pavucontrol/]
-    - (wireplumber)[https://wiki.archlinux.org/title/WirePlumber]
-    - (pipewire-pulse)[https://archlinux.org/packages/extra/x86_64/pipewire-pulse/]
+    - GUI: [pavucontrol](https://archlinux.org/packages/extra/x86_64/pavucontrol/)
+    - [wireplumber](https://wiki.archlinux.org/title/WirePlumber)
+    - [pipewire-pulse](https://archlinux.org/packages/extra/x86_64/pipewire-pulse/)
 - Keyboard Customizer: [keyd](https://github.com/rvaiya/keyd)
 
 ### `neovim` Setup
