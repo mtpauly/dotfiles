@@ -28,7 +28,7 @@ class CommandEventHandler(FileSystemEventHandler):
         if time.monotonic() - self.last_ran < COMMAND_REPEAT_TIME:
             return
 
-        if event.src_path == self.file:
+        if os.path.abspath(os.path.expanduser(event.src_path)) == self.file:
             print(f"\n[{get_new_york_time()}] $ {self.command}")
 
             start_time = time.monotonic()
