@@ -32,6 +32,13 @@
 - Window Manger: [yabai](https://github.com/koekeishiya/yabai)
 - Keybinds: [skhd](https://github.com/koekeishiya/skhd)
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
+- Night Shift: [flux](https://justgetflux.com/)
+
+#### When yabai breaks
+
+Some features of yabai break when updating your MacOS version and requires some manual steps to fix.
+
+Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(from-HEAD)#updating-to-latest-head) to update to the latest version and reconfigure the scripting addition.
 
 ### Linux Setup
 
@@ -52,8 +59,3 @@
 
 TODO: give overview
 
-### When yabai breaks
-
-Some features of yabai break when updating your MacOS version and requires some manual steps to fix.
-
-Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(from-HEAD)#updating-to-latest-head) to update to the latest version and reconfigure the scripting addition.
