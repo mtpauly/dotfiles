@@ -35,6 +35,8 @@
 
 ### Linux Setup
 
+- Distro: [arch](https://wiki.archlinux.org/title/Installation_guide)
+    - AUR Helper: [yay](https://github.com/Jguer/yay)
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://archlinux.org/packages/extra/any/ttf-firacode-nerd/)
 - Window Manager: [sway](https://swaywm.org/)
