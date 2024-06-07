@@ -24,6 +24,7 @@ link $HOME/.dotfiles/lazygit $HOME/.config/lazygit
 link $HOME/.dotfiles/lf $HOME/.config/lf
 link $HOME/.dotfiles/kitty $HOME/.config/kitty
 link $HOME/.dotfiles/sway $HOME/.config/sway
+link $HOME/.dotfiles/i3 $HOME/.config/i3
 link $HOME/.dotfiles/i3status $HOME/.config/i3status
 
 # directories
