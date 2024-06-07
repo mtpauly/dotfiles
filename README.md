@@ -46,7 +46,7 @@ Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/
     - AUR Helper: [yay](https://github.com/Jguer/yay)
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://archlinux.org/packages/extra/any/ttf-firacode-nerd/)
-- Window Manager: [sway](https://swaywm.org/)
+- Window Manager: [i3](https://i3wm.org/)
     - Brightness: [brightnessctl](https://github.com/Hummer12007/brightnessctl)
     - Status Bar: [i3status](https://man.archlinux.org/man/i3status.1)
 - Audio: [pipewire](https://wiki.archlinux.org/title/PipeWire)
