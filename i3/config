@@ -16,6 +16,18 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl 
 bindsym XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ 1
 
+# monitors
+workspace 1 output HDMI-2
+workspace 2 output HDMI-2
+workspace 3 output HDMI-2
+workspace 4 output HDMI-2
+workspace 5 output HDMI-2
+workspace 6 output eDP-1
+workspace 7 output eDP-1
+workspace 8 output eDP-1
+workspace 9 output eDP-1
+workspace 10 output eDP-1
+
 # mod key
 set $mod Mod4
 set $mod2 Mod1
