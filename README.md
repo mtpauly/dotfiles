@@ -49,6 +49,7 @@ Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/
 - Window Manager: [i3](https://i3wm.org/)
     - Brightness: [brightnessctl](https://github.com/Hummer12007/brightnessctl)
     - Status Bar: [i3status](https://man.archlinux.org/man/i3status.1)
+    - Night Shift: [redshift](https://wiki.archlinux.org/title/Redshift)
 - Audio: [pipewire](https://wiki.archlinux.org/title/PipeWire)
     - GUI: [pavucontrol](https://archlinux.org/packages/extra/x86_64/pavucontrol/)
     - [wireplumber](https://wiki.archlinux.org/title/WirePlumber)
