@@ -26,6 +26,7 @@ link $HOME/.dotfiles/kitty $HOME/.config/kitty
 link $HOME/.dotfiles/sway $HOME/.config/sway
 link $HOME/.dotfiles/i3 $HOME/.config/i3
 link $HOME/.dotfiles/i3status $HOME/.config/i3status
+link $HOME/.dotfiles/redshift $HOME/.config/redshift
 
 # directories
 link $HOME/.dotfiles/zshrc_private $HOME/.zshrc_private

@@ -1,6 +1,9 @@
 # input delay
 exec_always --no-startup-id xset r rate 200 40
 
+# redshift
+exec --no-startup-id redshift
+
 # window borders
 new_window pixel 2
 
