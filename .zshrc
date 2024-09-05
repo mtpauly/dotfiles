@@ -15,8 +15,8 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit  # required for conda-zsh-completion
 
 # User configuration
-# TODO: is this the appropriate place for this configuration
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin-personal
+export PATH=$PATH:$HOME/bin-work
 export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
 export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
 
@@ -26,6 +26,11 @@ for file in $HOME/.zshrc_private/*; do
         source $file
     fi
 done
+
+# source work zshrc
+if [[ -f ~/.dotfiles-work/.zshrc ]]; then
+    source ~/.dotfiles-work/.zshrc
+fi
 
 # enable fzf completion
 source <(fzf --zsh)

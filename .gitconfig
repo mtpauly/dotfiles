@@ -1,15 +1,20 @@
-[user]
-	name = mtpauly
-	email = peregrine.pauly@gmail.com
-
 [core]
     editor = nvim
+    pager = delta
 
 [merge]
     conflictstyle = diff3
 
-[diff]
-    colorMoved = default
+[pager]
+    blame = delta
+    diff = delta
+    reflog = delta
+    show = delta
+
+[delta]
+    dark = true
+    line-numbers = true
+    side-by-side = true
 
 [alias]
     s = status
@@ -17,4 +22,10 @@
     d = diff
     aa = add .
     rs = restore --staged .
+
+[includeIf "gitdir:~/"]
+    path = ~/.dotfiles-work/.gitconfig
+
+[includeIf "gitdir:~/.dotfiles/"]
+    path = ~/.dotfiles/.gitconfig-personal
 
