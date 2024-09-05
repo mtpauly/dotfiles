@@ -11,16 +11,15 @@ if [[ $# -eq 1 ]]; then
         exit 1
     fi
 else
-    opts=default
-    opts=$opts$'\n'$HOME/.dotfiles
-    selected_dirs=("personal" "research" "work" "school" "Documents" "Downloads")
+    opts=default$'\n'$HOME/.dotfiles$'\n'$HOME/.dotfiles/nvim$'\n'$HOME/.dotfiles-work
+    opts=$opts$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*')
+    selected_dirs=(~/personal ~/research ~/work ~/school ~/Documents ~/Downloads ~/repos)
     for d in "${selected_dirs[@]}"; do
-        subdirs=$(find ~/$d -mindepth 1 -maxdepth 1 -type d)
+        subdirs=$(find $d -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
         if [[ -n $subdirs ]]; then
             opts=$opts$'\n'$subdirs
         fi
     done
-    opts=$opts$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*')
 
     selected=$(echo $opts | fzf)
 fi
