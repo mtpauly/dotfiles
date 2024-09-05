@@ -59,3 +59,6 @@ vim.opt.foldenable = false
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
