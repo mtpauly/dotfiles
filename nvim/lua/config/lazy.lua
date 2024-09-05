@@ -47,6 +47,7 @@ require("lazy").setup({
     },
     { 'tpope/vim-surround' },
     { 'tpope/vim-fugitive' },
+    { 'tpope/vim-rhubarb' },
     { 'mbbill/undotree' },
     { 'lewis6991/gitsigns.nvim' },
     { "numToStr/Comment.nvim" },

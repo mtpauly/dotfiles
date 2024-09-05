@@ -29,7 +29,6 @@ require('telescope').setup{
 
 -- see: https://github.com/nvim-telescope/telescope.nvim#neovim-lsp-pickers
 vim.keymap.set('n', '<leader>fd', builtin.find_files, {}) -- "find files"
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {}) -- "find grep"
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {}) -- "find buffers"
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {}) -- "find help"
 vim.keymap.set('n', '<leader>fp', builtin.diagnostics, {}) -- "find problems"
@@ -46,3 +45,31 @@ wk.register({
         k = 'telescope.builtin.keymaps',
     },
 }, { prefix = '<leader>' })
+
+-- searching
+function vim.getVisualSelection()
+	vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<space>fG', ':Telescope current_buffer_fuzzy_find<cr>', opts)
+vim.keymap.set('v', '<space>fG', function()
+	local text = vim.getVisualSelection()
+	builtin.current_buffer_fuzzy_find({ default_text = text })
+end, opts)
+
+vim.keymap.set('n', '<space>fg', ':Telescope live_grep<cr>', opts)
+vim.keymap.set('v', '<space>fg', function()
+	local text = vim.getVisualSelection()
+	builtin.live_grep({ default_text = text })
+end, opts)
+
