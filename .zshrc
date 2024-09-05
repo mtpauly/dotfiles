@@ -28,7 +28,7 @@ for file in $HOME/.zshrc_private/*; do
 done
 
 # enable fzf completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # aliases
 alias t=tmux
@@ -64,12 +64,4 @@ bindkey '^Y' accept-autosuggestion-widget  # Bind Ctrl+Y to the custom widget
 
 # Add the custom widget to ZSH_AUTOSUGGEST_ACCEPT_WIDGETS for autosuggestions
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(accept-autosuggestion-widget)
-
-# setup shell traps for tmux
-# only traps when shell is interactive
-# [[ -n $PS1 ]] && trap "test -n $TMUX && test $(tmux list-panes | wc -l) -eq 1 && test $(tmux list-windows | wc -l) -eq 1 && tmux-sessionizer default" 0
-
-# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
-
-export AWS_EC2_METADATA_DISABLED=true
 
