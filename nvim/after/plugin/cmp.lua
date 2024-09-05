@@ -34,14 +34,15 @@ cmp.setup({
     },
 
     -- TODO: order the sources such that lsp comes first in the suggestions (currently doesn't always)
+    -- TODO: just think about which of these is really relevant
     sources = {
         { name = 'nvim_lsp', keyword_length = 2 },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'nvim_lua' , keyword_length = 2 },
-        { name = 'buffer', keyword_length = 2 },
-        { name = 'path' },
-        { name = 'luasnip', show_autosnippets = true },
-        { name = 'vsnip', keyword_length = 2 },
+        -- { name = 'nvim_lua' , keyword_length = 2 },
+        -- { name = 'buffer', keyword_length = 2 },
+        -- { name = 'path' },
+        -- { name = 'luasnip', show_autosnippets = true },
+        -- { name = 'vsnip', keyword_length = 2 },
     },
 
     -- TODO: why is this not working?? print statements not showing up...
