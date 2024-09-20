@@ -1,3 +1,7 @@
+; include personal user and email by default
+[include]
+    path = ~/.dotfiles/.gitconfig-personal
+
 [core]
     editor = nvim
     pager = delta
@@ -23,9 +27,11 @@
     aa = add .
     rs = restore --staged .
 
+; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
     path = ~/.dotfiles-work/.gitconfig
 
+; unless in the dotfiles directory
 [includeIf "gitdir:~/.dotfiles/"]
     path = ~/.dotfiles/.gitconfig-personal
 
