@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+set -e  # Exit immediately if a command exits with a non-zero status.
+
+# Check if a branch name is provided as an argument
+if [ $# -eq 0 ]; then
+    echo "Error: Branch name must be provided."
+    exit 1
+fi
+
+branch_to_delete=$1
+repo_name=$(basename $(git config --get remote.origin.url))
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+main_branch="main"
+
+# Function to check if a branch exists
+branch_exists() {
+    git show-ref --verify --quiet refs/heads/$1
+}
+
+# Check if the branch to delete is the main branch
+if [ "$branch_to_delete" = "$main_branch" ]; then
+    echo "Error: Cannot delete the main branch ($main_branch)."
+    exit 1
+fi
+
+# Check if the branch exists
+if ! branch_exists "$branch_to_delete"; then
+    echo "Error: Branch '$branch_to_delete' does not exist."
+    exit 1
+fi
+
+# Check if we're currently using branch to be deleted
+if [ "$current_branch" = "$branch_to_delete" ]; then
+    echo "Error: Cannot delete the branch you currently have checked out."
+    exit 1
+fi
+
+# Replace '/' with '-' in branch name for the worktree path
+safe_branch_name=$(echo $branch_to_delete | tr '/' '-')
+worktree_path="../$repo_name-$safe_branch_name"
+
+# Check if the worktree exists
+if [ ! -d "$worktree_path" ]; then
+    echo "Error: Worktree for branch '$branch_to_delete' not found at $worktree_path."
+    exit 1
+fi
+
+# Delete the worktree
+if ! git worktree remove "$worktree_path"; then
+    echo "Error: Failed to remove worktree for branch '$branch_to_delete'."
+    exit 1
+fi
+
+echo "Worktree for '$branch_to_delete' removed successfully."
+
+# Delete the branch
+# if ! git branch -D "$branch_to_delete"; then
+#     echo "Error: Failed to delete branch '$branch_to_delete'."
+#     exit 1
+# fi
+#
+# echo "Branch '$branch_to_delete' deleted successfully."
+
+# TODO: figure out the best way to deal with unmerged branches
+
+# Kill the tmux session associated with the branch
+tmux_session_name="repos/$repo_name-$safe_branch_name"
+if tmux has-session -t "$tmux_session_name" 2>/dev/null; then
+    if ! tmux kill-session -t "$tmux_session_name"; then
+        echo "Warning: Failed to kill tmux session '$tmux_session_name'."
+    else
+        echo "Tmux session '$tmux_session_name' killed successfully."
+    fi
+else
+    echo "No tmux session found for '$tmux_session_name'."
+fi
+
+echo "Worktree and branch deletion completed successfully."
