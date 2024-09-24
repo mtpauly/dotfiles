@@ -24,8 +24,17 @@
     s = status
     c = commit
     d = diff
+    ds = diff --staged
+    l = log
+    co = checkout
+    a = add
     aa = add .
+    wl = worktree list
+    wr = worktree remove
     rs = restore --staged .
+    b = branch -vv
+    bd = branch -d
+    sl = stash list
 
 ; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
