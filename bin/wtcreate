@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -e  # Exit immediately if a command exits with a non-zero status.
+
+repo_name=$(basename $(git config --get remote.origin.url))
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+main_branch="main"
+
+# Function to check if a branch exists
+branch_exists() {
+    git show-ref --verify --quiet refs/heads/$1
+}
+
+# Check if a branch name is provided as an argument
+if [ $# -eq 0 ]; then
+    # No argument provided, use current branch
+    branch_to_use=$current_branch
+    echo "No branch specified. Using current branch: $branch_to_use"
+else
+    # Use the provided branch name
+    branch_to_use=$1
+    echo "Using specified branch: $branch_to_use"
+fi
+
+# echo "DEBUG: Repository name: $repo_name"
+# echo "DEBUG: Current branch: $current_branch"
+# echo "DEBUG: Main branch: $main_branch"
+# echo "DEBUG: Branch to use for worktree: $branch_to_use"
+
+# Check if the branch to use is the main branch
+if [ "$branch_to_use" = "$main_branch" ]; then
+    echo "Error: Cannot create a worktree for the main branch ($main_branch)."
+    echo "The main branch should remain in the main repository."
+    exit 1
+fi
+
+# Check if the branch exists, create it if it doesn't
+if ! branch_exists "$branch_to_use"; then
+    echo "Branch '$branch_to_use' does not exist. Creating it now..."
+    if ! git branch "$branch_to_use"; then
+        echo "Error: Failed to create branch '$branch_to_use'."
+        exit 1
+    fi
+    echo "Branch '$branch_to_use' created successfully."
+fi
+
+# Check if current branch is not main, switch to main if necessary
+if [ "$current_branch" = "$branch_to_use" ]; then
+    git switch $main_branch
+fi
+
+# Replace '/' with '-' in branch name for the worktree path
+safe_branch_name=$(echo $branch_to_use | tr '/' '-')
+
+# Proceed with creating the worktree for non-main branches
+if ! git worktree add ../$repo_name-$safe_branch_name $branch_to_use; then
+    echo "Error: Failed to create worktree for branch '$branch_to_use'."
+    exit 1
+fi
+
+echo "Worktree for '$branch_to_use' created successfully at ../$repo_name-$safe_branch_name."
+
+# Copy user.bazelrc to the new worktree
+if [ -f "user.bazelrc" ]; then
+    cp user.bazelrc ../$repo_name-$safe_branch_name/
+    echo "user.bazelrc copied to new worktree."
+else
+    echo "Error: user.bazelrc not found and could not be copied to new worktree."
+    exit 1
+fi
