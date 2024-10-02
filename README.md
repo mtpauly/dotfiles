@@ -8,6 +8,7 @@
 - Use `bin/` for any scripts you want added to `$PATH`
 - Use `zshrc_private/` for any environment variables and additional configuration. All files in this directory are sourced at the bottom of `.zshrc`
 
+
 ### Requirements
 
 - Shell: [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
@@ -18,27 +19,23 @@
 - Editor: [nvim](https://github.com/neovim/neovim)
 - Conda: [miniforge](https://github.com/conda-forge/miniforge)
 
+
 #### Useful Command Line Tools
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [fzf](https://github.com/junegunn/fzf)
 - [gh](https://github.com/cli/cli)
 
+
 ### Mac Setup
 
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
     - Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
 - Package Manager: [brew](https://brew.sh/)
-- Window Manger: [yabai](https://github.com/koekeishiya/yabai)
-- Keybinds: [skhd](https://github.com/koekeishiya/skhd)
+- Window Manager: [AeroSpace](https://github.com/nikitabobko/AeroSpace)
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 - Night Shift: [flux](https://justgetflux.com/)
 
-#### When yabai breaks
-
-Some features of yabai break when updating your MacOS version and requires some manual steps to fix.
-
-Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(from-HEAD)#updating-to-latest-head) to update to the latest version and reconfigure the scripting addition.
 
 ### Linux Setup
 
@@ -55,6 +52,7 @@ Simply follow the instructions [here](https://github.com/koekeishiya/yabai/wiki/
     - [wireplumber](https://wiki.archlinux.org/title/WirePlumber)
     - [pipewire-pulse](https://archlinux.org/packages/extra/x86_64/pipewire-pulse/)
 - Keyboard Customizer: [keyd](https://github.com/rvaiya/keyd)
+
 
 ### `neovim` Setup
 
