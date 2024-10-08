@@ -87,6 +87,10 @@ outer.right =      0
 # end tell'
 # '''
 
+# Move workspace to next/previous monitor
+alt-shift-n = 'move-workspace-to-monitor next'
+alt-shift-p = 'move-workspace-to-monitor prev'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
