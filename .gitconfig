@@ -26,6 +26,7 @@
     cm = commit -m
     d = diff
     ds = diff --staged
+    du = diff @{u}
     l = log
     co = checkout
     a = add
