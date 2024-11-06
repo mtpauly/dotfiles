@@ -37,6 +37,7 @@
     b = branch -vv
     bd = branch -d
     sl = stash list
+    sp = stash pop
 
 ; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
