@@ -62,3 +62,6 @@ vim.o.splitbelow = true
 -- search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- vertical split
+vim.keymap.set('n', '<leader>v', '<cmd>vsp<cr>')
