@@ -51,6 +51,7 @@ def create_command(file: str, args: List[str]) -> str:
 
 
 def get_new_york_time():
+    # TODO: use system time zone
     ny_time = datetime.now(timezone.utc) - timedelta(hours=5)
     return ny_time.strftime("%H:%M:%S")
 
@@ -82,7 +83,7 @@ if __name__ == "__main__":
     path = os.path.abspath(os.path.expanduser(args.file))
     event_handler = CommandEventHandler(command, path)
     observer = Observer()
-    observer.schedule(event_handler, ".")
+    observer.schedule(event_handler, path)
     observer.start()
 
     try:
