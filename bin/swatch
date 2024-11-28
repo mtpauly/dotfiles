@@ -12,20 +12,23 @@ FILETYPE_COMMANDS = {
     ".py": "python3",
     ".go": "go run",
 }
-FS_SCAN_DELAY = 0.1
-RECURSIVE_MAX_FILE = 1000
+SINGLE_FILE_SCAN_DELAY = 0.1
+DIRECTORY_SCAN_DELAY = 1
+RECURSIVE_MAX_FILES = 100
 
 
 def run_command(command: str) -> None:
     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] $ {command}")
     start_time = time.monotonic()
-    # TODO: can we run this in the same shell? (with the same env vars, etc)
     subprocess.run(command, shell=True, text=True)
-    print(f"\ncommand finished in {time.monotonic() - start_time:.1f} seconds")
+    print(f"\nCommand finished in {time.monotonic() - start_time:.1f} seconds")
 
 
 class SingleFileWatcher:
     def __init__(self, path: str, command: str):
+        if not os.path.isfile(path):
+            return ValueError(f"Invalid file {path}")
+
         self.path = path
         self.update_time = 0
         self.command = command
@@ -46,7 +49,77 @@ class SingleFileWatcher:
         while True:
             if self.check_file():
                 run_command(self.command)
-            time.sleep(FS_SCAN_DELAY)
+            time.sleep(SINGLE_FILE_SCAN_DELAY)
+
+
+# TODO: support recursive watching
+class DirectoryWatcher:
+    def __init__(self, path: str, command: str, verbose=False):
+        if not os.path.isdir(path):
+            return ValueError(f"Invalid directory {path}")
+
+        self.path = path
+        self.command = command
+        self.verbose = verbose
+
+        self.dir_update_time = 0
+        self.files = {}  # path, update time
+        self.check_directory()
+        self.populate_files()
+
+    def populate_files(self) -> tuple[list, list]:
+        created = []
+        deleted = []
+        files = os.listdir(self.path)
+
+        for path in self.files:
+            if path not in files:
+                deleted.append(path)
+        for path in deleted:
+            del self.files[path]
+
+        for path in files:
+            if path not in self.files:
+                self.files[path] = os.stat(path).st_mtime
+                created.append(path)
+
+        return created, deleted
+
+    def check_files(self) -> list:
+        modified = []
+        for path, update_time in self.files.items():
+            self.files[path] = os.stat(path).st_mtime
+            if self.files[path] > update_time:
+                modified.append(path)
+        return modified
+
+    def check_directory(self) -> bool:
+        update_time_old = self.dir_update_time
+        self.dir_update_time = os.stat(self.path).st_mtime
+        return self.dir_update_time > update_time_old
+
+    def start(self) -> NoReturn:
+        while True:
+            dir_modified = self.check_directory()
+            if dir_modified:
+                created, deleted = self.populate_files()
+                if self.verbose:
+                    print()
+                    for path in created:
+                        print(f'Created: {path}')
+                    for path in deleted:
+                        print(f'Deleted: {path}')
+
+            modified = self.check_files()
+            if self.verbose and modified:
+                print()
+                for path in modified:
+                    print(f'Modified: {path}')
+
+            if dir_modified or modified:
+                run_command(self.command)
+
+            time.sleep(DIRECTORY_SCAN_DELAY)
 
 
 def create_command(file: str, args: List[str]) -> str:
@@ -71,6 +144,11 @@ if __name__ == "__main__":
         "--command",
         required=False,
         help="Command to run when file changes, if not provided will infer from file extension",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Print additional information on what files changed in directory watching mode",
     )
     parser.add_argument(
         "args",
@@ -99,7 +177,7 @@ if __name__ == "__main__":
     if os.path.isfile(path):
         watcher = SingleFileWatcher(path, command)
     else:
-        pass
+        watcher = DirectoryWatcher(path, command, args.verbose)
 
     try:
         watcher.start()
