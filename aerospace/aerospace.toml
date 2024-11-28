@@ -40,7 +40,8 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# TODO: for some reason uncommenting this causes an config error starting aerospace
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
