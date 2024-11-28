@@ -108,12 +108,6 @@ require("lazy").setup({
     { 'mfussenegger/nvim-jdtls' },
     -- { 'simrat39/rust-tools.nvim' },
 
-    -- debugging
-    { 'mfussenegger/nvim-dap' },
-    { 'rcarriga/nvim-dap-ui' },
-    { 'theHamsta/nvim-dap-virtual-text' },
-    { 'nvim-telescope/telescope-dap.nvim' },
-
     { "aserowy/tmux.nvim" },
     {
         'stevearc/oil.nvim',
