@@ -2,58 +2,60 @@
 
 import os
 import argparse
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler, FileSystemEvent
 import subprocess
 import time
-from typing import List
-from datetime import datetime, timedelta, timezone
+from typing import List, NoReturn
+from datetime import datetime
 
 
 FILETYPE_COMMANDS = {
     ".py": "python3",
     ".go": "go run",
 }
+FS_SCAN_DELAY = 0.1
+RECURSIVE_MAX_FILE = 1000
 
-COMMAND_REPEAT_TIME = 0.1
+
+def run_command(command: str) -> None:
+    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] $ {command}")
+    start_time = time.monotonic()
+    # TODO: can we run this in the same shell? (with the same env vars, etc)
+    subprocess.run(command, shell=True, text=True)
+    print(f"\ncommand finished in {time.monotonic() - start_time:.1f} seconds")
 
 
-class CommandEventHandler(FileSystemEventHandler):
-    def __init__(self, command: str, file: str):
+class SingleFileWatcher:
+    def __init__(self, path: str, command: str):
+        self.path = path
+        self.update_time = 0
         self.command = command
-        self.file = file
-        self.last_ran = 0
+        self.check_file()
 
-    def on_modified(self, event: FileSystemEvent):
-        if time.monotonic() - self.last_ran < COMMAND_REPEAT_TIME:
-            return
+    def check_file(self) -> bool:
+        """Update the file time, returning true if there was an update."""
+        update_time_old = self.update_time
 
-        if os.path.abspath(os.path.expanduser(event.src_path)) == self.file:
-            print(f"\n[{get_new_york_time()}] $ {self.command}")
+        try:
+            self.update_time = os.stat(self.path).st_mtime
+        except Exception as e:
+            raise Exception(f"Update file time failed with exception {e}")
 
-            start_time = time.monotonic()
-            # TODO: can we run this in the same shell?
-            subprocess.run(self.command, shell=True, text=True)
-            end_time = time.monotonic()
+        return self.update_time > update_time_old
 
-            print(f"\ncommand finished in {end_time-start_time:.1f} seconds")
-            self.last_ran = time.monotonic()
+    def start(self) -> NoReturn:
+        while True:
+            if self.check_file():
+                run_command(self.command)
+            time.sleep(FS_SCAN_DELAY)
 
 
 def create_command(file: str, args: List[str]) -> str:
     _, filetype = os.path.splitext(file)
     if filetype not in FILETYPE_COMMANDS:
-        raise Exception(
-            f"Filetype {filetype} not supported. Please provide and explicit command or use a file with filetype {list(FILETYPE_COMMANDS.keys())}"
+        raise argparse.ArgumentTypeError(
+            f"Filetype {filetype} not supported. Please provide and explicit command with --command or use a file with filetype {list(FILETYPE_COMMANDS.keys())}"
         )
-
     return " ".join([FILETYPE_COMMANDS[filetype], file] + args)
-
-
-def get_new_york_time():
-    # TODO: use system time zone
-    ny_time = datetime.now(timezone.utc) - timedelta(hours=5)
-    return ny_time.strftime("%H:%M:%S")
 
 
 if __name__ == "__main__":
@@ -61,36 +63,45 @@ if __name__ == "__main__":
         description="Watch a file and run a command when it changes",
     )
     parser.add_argument(
-        "file",
-        help="file to watch for changes",
+        "path",
+        help="The file/directory to watch for changes",
     )
     parser.add_argument(
         "-c",
         "--command",
         required=False,
-        help="command to run when file changes, if not provided will infer from file extension",
+        help="Command to run when file changes, if not provided will infer from file extension",
     )
     parser.add_argument(
         "args",
         nargs="*",
-        help="additional arguments to pass to the command",
+        help="Additional arguments to pass to the command",
     )
     args = parser.parse_args()
 
-    command = args.command if args.command else create_command(args.file, args.args)
-    print(f'watching file "{args.file}" and running command "{command}"')
+    if not os.path.isfile(args.path) and not os.path.isdir(args.path):
+        raise argparse.ArgumentTypeError(
+            f"Path {args.path} is neither a file or a directory"
+        )
 
-    path = os.path.abspath(os.path.expanduser(args.file))
-    event_handler = CommandEventHandler(command, path)
-    observer = Observer()
-    observer.schedule(event_handler, path)
-    observer.start()
+    if args.command:
+        command = args.command
+    elif os.path.isfile(args.path):
+        command = create_command(args.path, args.args)
+    else:
+        raise argparse.ArgumentTypeError(
+            f"When providing a directory the command must be specified explicitly with --command"
+        )
+
+    path = os.path.abspath(os.path.expanduser(args.path))
+    print(f'Watching path "{path}" and running command "{command}" on changes')
+
+    if os.path.isfile(path):
+        watcher = SingleFileWatcher(path, command)
+    else:
+        pass
 
     try:
-        while observer.is_alive():
-            observer.join(1)
+        watcher.start()
     except KeyboardInterrupt:
         pass
-    finally:
-        observer.stop()
-        observer.join()
