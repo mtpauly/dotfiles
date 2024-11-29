@@ -22,8 +22,10 @@ def run_command(command: str, clear: bool = False) -> None:
         os.system("clear")
     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] $ {command}")
     start_time = time.monotonic()
-    subprocess.run(command, shell=True, text=True)
-    print(f"\nCommand finished in {time.monotonic() - start_time:.1f} seconds")
+    result = subprocess.run(command, shell=True, text=True)
+    print(
+        f"\nCommand finished with code {result.returncode} in {time.monotonic() - start_time:.1f} seconds"
+    )
 
 
 class SingleFileWatcher:
