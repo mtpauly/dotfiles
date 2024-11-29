@@ -1,40 +1,44 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-# see: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+# Reworked from: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 
-# select a directory
-if [[ $# -eq 1 ]]; then
-    selected=$1
+# Directory options
+opts="default
+$HOME/.dotfiles
+$HOME/.dotfiles/nvim
+$HOME/.dotfiles-work"
 
-    if [[ ! -d $selected ]] && [[ ! $selected = "default" ]]; then
-        echo "Directory '$selected' does not exist"
-        exit 1
+# Each subdirectory will be added to the directory options list
+selected_dirs=(
+    ~/repos
+    ~/personal
+    ~/research
+    ~/work
+    ~/school
+    ~/Documents
+    ~/Downloads
+)
+
+# Select a directory
+opts=$opts$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*')
+for d in "${selected_dirs[@]}"; do
+    subdirs=$(find $d -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+    if [[ -n $subdirs ]]; then
+        opts=$opts$'\n'$subdirs
     fi
-else
-    opts=default$'\n'$HOME/.dotfiles$'\n'$HOME/.dotfiles/nvim$'\n'$HOME/.dotfiles-work
-    opts=$opts$'\n'$(find ~ -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*')
-    selected_dirs=(~/personal ~/research ~/work ~/school ~/Documents ~/Downloads ~/repos)
-    for d in "${selected_dirs[@]}"; do
-        subdirs=$(find $d -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
-        if [[ -n $subdirs ]]; then
-            opts=$opts$'\n'$subdirs
-        fi
-    done
+done
+selected=$(echo "$opts" | fzf)
 
-    selected=$(echo $opts | fzf)
-fi
-
-# exit if nothing selected
+# Exit if nothing selected
 if [[ -z $selected ]]; then
     exit 1
 fi
 
-# handle "default" separately since it isn't a path
+# Get the name for the session, handling 'default' separately since it's not a path
 if [[ $selected = "default" ]]; then
     selected=$HOME
     selected_name="default"
 else
-    # handle selected directories
     selected_dir=$(echo $selected | sed -r "s#^${HOME}/([^/]+)/.*#\1#")
     if [[ "${selected_dirs[@]}" == *"$selected_dir"* ]]; then
         selected_name=$selected_dir/$(basename $selected | tr . _)
@@ -43,16 +47,16 @@ else
     fi
 fi
 
-# if tmux not running, create a new session and attach to it
+# If tmux isn't running, start it with the new session attached
 if [[ -z $TMUX ]]; then
     tmux new-session -As $selected_name -c $selected
     exit 0
 fi
 
-# check if a session with the same name already exists
+# Create the session if it doesn't already exist
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
+# Switch to the session
 tmux switch-client -t $selected_name
-
