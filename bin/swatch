@@ -17,7 +17,9 @@ DIRECTORY_SCAN_DELAY = 1
 RECURSIVE_MAX_FILES = 100
 
 
-def run_command(command: str) -> None:
+def run_command(command: str, clear: bool = False) -> None:
+    if clear:
+        os.system("clear")
     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] $ {command}")
     start_time = time.monotonic()
     subprocess.run(command, shell=True, text=True)
@@ -25,13 +27,15 @@ def run_command(command: str) -> None:
 
 
 class SingleFileWatcher:
-    def __init__(self, path: str, command: str):
+    def __init__(self, path: str, command: str, clear: bool = False):
         if not os.path.isfile(path):
             return ValueError(f"Invalid file {path}")
 
         self.path = path
-        self.update_time = 0
         self.command = command
+        self.clear = clear
+
+        self.update_time = 0
         self.check_file()
 
     def check_file(self) -> bool:
@@ -48,22 +52,25 @@ class SingleFileWatcher:
     def start(self) -> NoReturn:
         while True:
             if self.check_file():
-                run_command(self.command)
+                run_command(self.command, self.clear)
             time.sleep(SINGLE_FILE_SCAN_DELAY)
 
 
 # TODO: support recursive watching
 class DirectoryWatcher:
-    def __init__(self, path: str, command: str, verbose=False):
+    def __init__(
+        self, path: str, command: str, verbose: bool = False, clear: bool = False
+    ):
         if not os.path.isdir(path):
             return ValueError(f"Invalid directory {path}")
 
         self.path = path
         self.command = command
         self.verbose = verbose
+        self.clear = clear
 
         self.dir_update_time = 0
-        self.files = {}  # path, update time
+        self.files = {}  # path: update time
         self.check_directory()
         self.populate_files()
 
@@ -106,18 +113,18 @@ class DirectoryWatcher:
                 if self.verbose:
                     print()
                     for path in created:
-                        print(f'Created: {path}')
+                        print(f"Created: {path}")
                     for path in deleted:
-                        print(f'Deleted: {path}')
+                        print(f"Deleted: {path}")
 
             modified = self.check_files()
             if self.verbose and modified:
                 print()
                 for path in modified:
-                    print(f'Modified: {path}')
+                    print(f"Modified: {path}")
 
             if dir_modified or modified:
-                run_command(self.command)
+                run_command(self.command, self.clear)
 
             time.sleep(DIRECTORY_SCAN_DELAY)
 
@@ -151,6 +158,11 @@ if __name__ == "__main__":
         help="Print additional information on what files changed in directory watching mode",
     )
     parser.add_argument(
+        "--clear",
+        action="store_true",
+        help="Clear the screen before the command is run",
+    )
+    parser.add_argument(
         "args",
         nargs="*",
         help="Additional arguments to pass to the command",
@@ -175,9 +187,9 @@ if __name__ == "__main__":
     print(f'Watching path "{path}" and running command "{command}" on changes')
 
     if os.path.isfile(path):
-        watcher = SingleFileWatcher(path, command)
+        watcher = SingleFileWatcher(path, command, args.clear)
     else:
-        watcher = DirectoryWatcher(path, command, args.verbose)
+        watcher = DirectoryWatcher(path, command, args.verbose, args.clear)
 
     try:
         watcher.start()
