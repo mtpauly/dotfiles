@@ -38,13 +38,10 @@ source <(fzf --zsh)
 # aliases
 alias t=tmux
 alias n=nvim
-alias v=nvim
 alias p=python3
+alias sw=swatch
 alias tms=tmux-sessionizer
 alias tmd="tmux-sessionizer default"
-alias lg=lazygit
-alias cs="gh copilot suggest" # https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli
-alias ce="gh copilot explain"
 
 # no beep
 unsetopt BEEP LIST_BEEP
