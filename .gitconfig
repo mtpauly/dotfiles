@@ -29,13 +29,16 @@
     du = diff @{u}
     l = log
     co = checkout
+    cob = checkout -b
     a = add
     aa = add .
     wl = worktree list
     wr = worktree remove
+    wp = worktree prune
     rs = restore --staged .
     b = branch -vv
     bd = branch -d
+    bdd = branch -D
     sl = stash list
     sp = stash pop
 
