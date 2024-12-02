@@ -41,7 +41,6 @@ alias n=nvim
 alias p=python3
 alias sw=swatch
 alias tms=tmux-sessionizer
-alias tmd="tmux-sessionizer default"
 
 # no beep
 unsetopt BEEP LIST_BEEP
