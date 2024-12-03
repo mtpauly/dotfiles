@@ -17,15 +17,19 @@ DIRECTORY_SCAN_DELAY = 1
 RECURSIVE_MAX_FILES = 100
 
 
-def run_command(command: str, clear: bool = False) -> None:
-    if clear:
-        os.system("clear")
+def run_command(command: str) -> None:
     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] $ {command}")
     start_time = time.monotonic()
     result = subprocess.run(command, shell=True, text=True)
     print(
         f"\nCommand finished with code {result.returncode} in {time.monotonic() - start_time:.1f} seconds"
     )
+
+
+def clear() -> None:
+    # scroll all content off the screen without clearning the history
+    # TODO:
+    os.system("clear")
 
 
 class SingleFileWatcher:
@@ -53,12 +57,18 @@ class SingleFileWatcher:
 
     def start(self) -> NoReturn:
         while True:
-            if self.check_file():
-                run_command(self.command, self.clear)
-            time.sleep(SINGLE_FILE_SCAN_DELAY)
+            if not self.check_file():
+                time.sleep(SINGLE_FILE_SCAN_DELAY)
+                continue
+
+            if self.clear:
+                clear()
+
+            run_command(self.command)
 
 
 # TODO: support recursive watching
+# TODO: there is currently some unexpected behavior-- try with verbose and edit a file in a subdir
 class DirectoryWatcher:
     def __init__(
         self, path: str, command: str, verbose: bool = False, clear: bool = False
@@ -120,15 +130,19 @@ class DirectoryWatcher:
                         print(f"Deleted: {path}")
 
             modified = self.check_files()
-            if self.verbose and modified:
+            if not dir_modified and not modified:
+                time.sleep(DIRECTORY_SCAN_DELAY)
+                continue
+
+            if self.clear:
+                clear()
+
+            if modified and self.verbose:
                 print()
                 for path in modified:
                     print(f"Modified: {path}")
 
-            if dir_modified or modified:
-                run_command(self.command, self.clear)
-
-            time.sleep(DIRECTORY_SCAN_DELAY)
+            run_command(self.command)
 
 
 def create_command(file: str, args: List[str]) -> str:
