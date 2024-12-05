@@ -41,6 +41,7 @@
     bdd = branch -D
     sl = stash list
     sp = stash pop
+    ss = switch -
 
 ; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
