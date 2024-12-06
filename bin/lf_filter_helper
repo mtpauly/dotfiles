@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-touch /tmp/lf_filter_$1
-new_filter=$(cat /tmp/lf_filter_$1)$2 # id, letter
-echo $new_filter > /tmp/lf_filter_$1
-lf -remote "send $1 setfilter *$(echo $new_filter | sed -r 's/(.)/\1*/g')"
-printf "current filter: $new_filter"
