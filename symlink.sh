@@ -14,8 +14,6 @@ link() {
 # files
 link $HOME/.dotfiles/.zshrc $HOME/.zshrc
 link $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
-link $HOME/.dotfiles/.yabairc $HOME/.yabairc
-link $HOME/.dotfiles/.skhdrc $HOME/.skhdrc
 
 # .config
 link $HOME/.dotfiles/nvim $HOME/.config/nvim
