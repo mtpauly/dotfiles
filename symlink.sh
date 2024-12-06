@@ -30,6 +30,5 @@ link $HOME/.dotfiles/redshift $HOME/.config/redshift
 link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
 
 # directories
-link $HOME/.dotfiles/zshrc_private $HOME/.zshrc_private
 link $HOME/.dotfiles/bin $HOME/bin-personal
 

@@ -22,11 +22,10 @@ export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
 export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
 
 # source private config
-for file in $HOME/.zshrc_private/*; do
-    if [[ -f $file && -r $file ]]; then
-        source $file
-    fi
-done
+ZSHRC_PRIVATE=zshrc_private.sh
+if [[ -f $ZSHRC_PRIVATE ]]; then
+    source $ZSHRC_PRIVATE
+fi
 
 # source work zshrc
 if [[ -f ~/.dotfiles-work/.zshrc ]]; then
