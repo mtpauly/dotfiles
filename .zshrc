@@ -15,6 +15,7 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit  # required for conda-zsh-completion
 
 # User configuration
+export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/bin-personal
 export PATH=$PATH:$HOME/bin-work
 export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
