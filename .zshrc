@@ -49,12 +49,6 @@ unsetopt BEEP LIST_BEEP
 # only use less when the output is taller than the height of the terminal
 export LESS="-FR"
 
-# configure command time
-ZSH_COMMAND_TIME_MIN_SECONDS=3
-ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
-ZSH_COMMAND_TIME_COLOR="cyan"
-ZSH_COMMAND_TIME_EXCLUDE=(nvim n v tmux t lf lg)
-
 # configure autosuggestions with C-y to complete
 # Define a custom widget to accept autosuggestion
 function accept-autosuggestion-widget() {
