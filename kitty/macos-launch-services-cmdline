@@ -1,0 +1,1 @@
+kitty -o allow_remote_control=yes -o enabled_layouts=tall
