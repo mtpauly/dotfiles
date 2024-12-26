@@ -42,6 +42,7 @@ alias n=nvim
 alias p=python3
 alias sw=swatch
 alias tms=tmux-sessionizer
+alias kssh="kitty +kitten ssh"
 
 # no beep
 unsetopt BEEP LIST_BEEP
