@@ -12,7 +12,6 @@ plugins=(
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
 source $ZSH/oh-my-zsh.sh
-autoload -U compinit && compinit  # required for conda-zsh-completion
 
 # User configuration
 export PATH=$PATH:$HOME/bin
@@ -56,9 +55,5 @@ function accept-autosuggestion-widget() {
     zle autosuggest-accept
 }
 zle -N accept-autosuggestion-widget  # Register the widget with ZLE
-
 bindkey '^Y' accept-autosuggestion-widget  # Bind Ctrl+Y to the custom widget
-
-# Add the custom widget to ZSH_AUTOSUGGEST_ACCEPT_WIDGETS for autosuggestions
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(accept-autosuggestion-widget)
-
