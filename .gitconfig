@@ -24,6 +24,8 @@
     s = status
     c = commit
     cm = commit -m
+    ca = commit --amend
+    ce = commit --amend --no-edit
     d = diff
     ds = diff --staged
     du = diff @{u}
