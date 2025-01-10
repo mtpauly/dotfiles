@@ -46,6 +46,9 @@
     sm = stash push -m
     ss = switch -
 
+[commit]
+    verbose = true
+
 ; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
     path = ~/.dotfiles-work/.gitconfig
