@@ -33,7 +33,7 @@
     co = checkout
     cob = checkout -b
     a = add
-    aa = add .
+    aa = add --all
     wl = worktree list
     wr = worktree remove
     wp = worktree prune
