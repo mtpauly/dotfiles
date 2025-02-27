@@ -49,6 +49,9 @@
 [commit]
     verbose = true
 
+[init]
+    defaultBranch = main
+
 ; if work config is defined, override the personal
 [includeIf "gitdir:~/"]
     path = ~/.dotfiles-work/.gitconfig
