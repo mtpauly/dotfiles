@@ -1,11 +1,11 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 link() {
-    local src="$1"
-    local dst="$2"
+    src="$1"
+    dst="$2"
 
-    if [[ -L $dst ]]; then
-        rm $dst
+    if [ -e $dst ]; then
+        rm $dst || exit 1
     fi
 
     ln -s $src $dst
@@ -20,6 +20,7 @@ link $HOME/.dotfiles/nvim $HOME/.config/nvim
 link $HOME/.dotfiles/tmux $HOME/.config/tmux
 link $HOME/.dotfiles/kitty $HOME/.config/kitty
 link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
+link $HOME/.dotfiles/hypr $HOME/.config/hypr
 
 # Directories
 link $HOME/.dotfiles/bin $HOME/bin-personal
