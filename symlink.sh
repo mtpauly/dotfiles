@@ -11,22 +11,16 @@ link() {
     ln -s $src $dst
 }
 
-# files
+# Files
 link $HOME/.dotfiles/.zshrc $HOME/.zshrc
 link $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 
-# .config
+# Config
 link $HOME/.dotfiles/nvim $HOME/.config/nvim
 link $HOME/.dotfiles/tmux $HOME/.config/tmux
-link $HOME/.dotfiles/lazygit $HOME/.config/lazygit
-link $HOME/.dotfiles/lf $HOME/.config/lf
 link $HOME/.dotfiles/kitty $HOME/.config/kitty
-link $HOME/.dotfiles/sway $HOME/.config/sway
-link $HOME/.dotfiles/i3 $HOME/.config/i3
-link $HOME/.dotfiles/i3status $HOME/.config/i3status
-link $HOME/.dotfiles/redshift $HOME/.config/redshift
 link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
 
-# directories
+# Directories
 link $HOME/.dotfiles/bin $HOME/bin-personal
 
