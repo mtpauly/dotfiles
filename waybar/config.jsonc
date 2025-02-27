@@ -1,0 +1,7 @@
+{
+    "layer": "top",
+    "modules-right": ["hyprland/workspaces", "clock"],
+    "clock": {
+        "format-alt": "{:%a, %d. %b  %H:%M}"
+    }
+}
