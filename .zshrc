@@ -1,8 +1,9 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Don't need to provide omz path on nixos
+if [ -z $NIX_PATH ]; then
+    export ZSH="$HOME/.oh-my-zsh"
+fi
 
 ZSH_THEME=robbyrussell
-
 plugins=(
     git
     vi-mode
@@ -14,28 +15,27 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  #
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/bin-personal
-export PATH=$PATH:$HOME/bin-work
-export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
-export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
+export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
+# TODO: source platorform-dependent config files
+# export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
+# export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
 
-# source private config
+# Source private config
 ZSHRC_PRIVATE=~/.dotfiles/zshrc_private
 if [[ -f $ZSHRC_PRIVATE ]]; then
     source $ZSHRC_PRIVATE
 fi
 
-# source work zshrc
+# Source work zshrc
 ZSHRC_WORK=~/.dotfiles-work/.zshrc
 if [[ -f $ZSHRC_WORK ]]; then
     source $ZSHRC_WORK
 fi
 
-# enable fzf completion
+# Enable fzf completion
 source <(fzf --zsh)
 
-# aliases
+# Aliases
 alias t=tmux
 alias n=nvim
 alias p=python3
@@ -43,14 +43,13 @@ alias sw=swatch
 alias tms=tmux-sessionizer
 alias kssh="kitty +kitten ssh"
 
-# no beep
+# No beep
 unsetopt BEEP LIST_BEEP
 
-# only use less when the output is taller than the height of the terminal
+# Only use less when the output is taller than the height of the terminal
 export LESS="-FR"
 
-# configure autosuggestions with C-y to complete
-# Define a custom widget to accept autosuggestion
+# Configure autosuggestions with C-y to complete
 function accept-autosuggestion-widget() {
     zle autosuggest-accept
 }
