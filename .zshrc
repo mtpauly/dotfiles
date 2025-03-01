@@ -1,20 +1,34 @@
-# Don't need to provide omz path on nixos
-if [ -z $NIX_PATH ]; then
-    export ZSH="$HOME/.oh-my-zsh"
-fi
+# History configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=10000
 
-ZSH_THEME=robbyrussell
-plugins=(
-    git
-    vi-mode
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-)
+# Prompt
+autoload -Uz promptinit
+promptinit
+prompt adam1
+# TODO: configure this more
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src  # required for zsh-completions
-source $ZSH/oh-my-zsh.sh
+# Completions
+fpath+=~/zsh/completions
+autoload -Uz compinit
+compinit
 
-# User configuration
+# Plugins
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+ZVM_CURSOR_STYLE_ENABLED=false
+source ~/.zsh/zsh-vi-mode/zsh-vi-mode.zsh
+
+# Configure autosuggestions with C-y to complete
+function accept-autosuggestion-widget() {
+    zle autosuggest-accept
+}
+zle -N accept-autosuggestion-widget  # Register the widget with ZLE
+bindkey '^Y' accept-autosuggestion-widget  # Bind Ctrl+Y to the custom widget
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(accept-autosuggestion-widget)
+
+# Path setup
 export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
 # TODO: source platorform-dependent config files
 # export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
@@ -38,10 +52,12 @@ source <(fzf --zsh)
 # Aliases
 alias t=tmux
 alias n=nvim
+alias g=git
 alias p=python3
 alias sw=swatch
 alias tms=tmux-sessionizer
 alias kssh="kitty +kitten ssh"
+alias lsa="ls -lah"
 
 # No beep
 unsetopt BEEP LIST_BEEP
@@ -49,10 +65,6 @@ unsetopt BEEP LIST_BEEP
 # Only use less when the output is taller than the height of the terminal
 export LESS="-FR"
 
-# Configure autosuggestions with C-y to complete
-function accept-autosuggestion-widget() {
-    zle autosuggest-accept
-}
-zle -N accept-autosuggestion-widget  # Register the widget with ZLE
-bindkey '^Y' accept-autosuggestion-widget  # Bind Ctrl+Y to the custom widget
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(accept-autosuggestion-widget)
+# Syntax highlighting must be sourced at the end of the zshrc
+# https://github.com/zsh-users/zsh-syntax-highlighting/tree/master?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
+source ~/.zsh/zsh-vi-mode/zsh-vi-mode.zsh
