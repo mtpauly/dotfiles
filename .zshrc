@@ -16,17 +16,10 @@ compinit
 
 # Plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^Y' autosuggest-accept
 
 ZVM_CURSOR_STYLE_ENABLED=false
 source ~/.zsh/zsh-vi-mode/zsh-vi-mode.zsh
-
-# Configure autosuggestions with C-y to complete
-function accept-autosuggestion-widget() {
-    zle autosuggest-accept
-}
-zle -N accept-autosuggestion-widget  # Register the widget with ZLE
-bindkey '^Y' accept-autosuggestion-widget  # Bind Ctrl+Y to the custom widget
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(accept-autosuggestion-widget)
 
 # Path setup
 export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
@@ -57,7 +50,7 @@ alias p=python3
 alias sw=swatch
 alias tms=tmux-sessionizer
 alias kssh="kitty +kitten ssh"
-alias lsa="ls -lah"
+alias lsa="ls -alh"
 
 # No beep
 unsetopt BEEP LIST_BEEP
@@ -67,4 +60,4 @@ export LESS="-FR"
 
 # Syntax highlighting must be sourced at the end of the zshrc
 # https://github.com/zsh-users/zsh-syntax-highlighting/tree/master?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
-source ~/.zsh/zsh-vi-mode/zsh-vi-mode.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
