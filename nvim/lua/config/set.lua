@@ -64,4 +64,4 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- vertical split
-vim.keymap.set('n', '<leader>v', '<cmd>vsp<cr>', { noremap = true})
+vim.keymap.set('n', '<leader>m', '<cmd>vsp<cr>', { noremap = true})
