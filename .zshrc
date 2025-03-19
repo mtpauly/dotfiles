@@ -18,9 +18,6 @@ compinit
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^Y' autosuggest-accept
 
-ZVM_CURSOR_STYLE_ENABLED=false
-source ~/.zsh/zsh-vi-mode/zsh-vi-mode.zsh
-
 # Path setup
 export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
 # TODO: source platorform-dependent config files
@@ -38,6 +35,9 @@ ZSHRC_WORK=~/.dotfiles-work/.zshrc
 if [[ -f $ZSHRC_WORK ]]; then
     source $ZSHRC_WORK
 fi
+
+# Vim mode
+bindkey -v
 
 # Enable fzf completion
 source <(fzf --zsh)
