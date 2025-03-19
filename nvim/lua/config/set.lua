@@ -65,3 +65,7 @@ vim.opt.smartcase = true
 
 -- vertical split
 vim.keymap.set('n', '<leader>m', '<cmd>vsp<cr>', { noremap = true})
+
+-- Directory-specific configuration
+vim.o.exrc = true
+vim.o.secure = true
