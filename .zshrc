@@ -50,6 +50,8 @@ alias p=python3
 alias sw=swatch
 alias tms=tmux-sessionizer
 alias kssh="kitty +kitten ssh"
+
+alias ls="ls --color"
 alias lsa="ls -alh"
 
 # No beep
