@@ -21,6 +21,9 @@ bindkey -v
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^Y' autosuggest-accept
 
+# History navigation with Ctrl+P and Ctrl+N
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
 # Path setup
 export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
 # TODO: source platorform-dependent config files
