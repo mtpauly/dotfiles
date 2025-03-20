@@ -14,6 +14,9 @@ fpath+=~/zsh/completions
 autoload -Uz compinit
 compinit
 
+# Vim mode (this needs to go before autosuggestions or it will break the keybind)
+bindkey -v
+
 # Plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^Y' autosuggest-accept
@@ -35,9 +38,6 @@ ZSHRC_WORK=~/.dotfiles-work/.zshrc
 if [[ -f $ZSHRC_WORK ]]; then
     source $ZSHRC_WORK
 fi
-
-# Vim mode
-bindkey -v
 
 # Enable fzf completion
 source <(fzf --zsh)
