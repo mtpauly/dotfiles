@@ -47,6 +47,8 @@ alias t=tmux
 alias n=nvim
 alias g=git
 alias p=python3
+alias k=kubectl
+
 alias sw=swatch
 alias tms=tmux-sessionizer
 alias kssh="kitty +kitten ssh"
