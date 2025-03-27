@@ -9,7 +9,7 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats '%F{3}[%b]%f'
 setopt PROMPT_SUBST
 PROMPT='%K{4}%n@%m%k %B%F{2}%215<...<%~ %f%b${vcs_info_msg_0_}
-%}%F{white} %# %b%f%k'
+%(?.%F{7} %#.%F{1} ✗) %b%f%k'
 
 # Run this to see available colors
 # function zsh_colors() {
