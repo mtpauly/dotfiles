@@ -5,18 +5,22 @@ SAVEHIST=10000
 
 # Prompt
 autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats '%F{3}[%b]%f'
+precmd() { 
+    vcs_info
+    if [[ -n $PROMPT_INCLUDE_NEWLINE ]]; then
+        print
+    fi
+    PROMPT_INCLUDE_NEWLINE=1
+}
+zstyle ':vcs_info:git:*' formats '%F{198}(%b)%f'
 setopt PROMPT_SUBST
-PROMPT='%K{4}%n@%m%k %B%F{2}%215<...<%~ %f%b${vcs_info_msg_0_}
+PROMPT='%K{4}%n@%m%k %B%F{97}%215<...<%~ %f%b${vcs_info_msg_0_}
 %(?.%F{7} %#.%F{1} ✗) %b%f%k'
 
 # Run this to see available colors
-# function zsh_colors() {
-#   for i in {0..255}; do
+# for i in {0..255}; do
 #     print -P "%F{$i}Color $i%f"
-#   done
-# }
+# done
 
 # Completions
 fpath+=~/zsh/completions
