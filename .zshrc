@@ -4,10 +4,19 @@ HISTSIZE=50000
 SAVEHIST=10000
 
 # Prompt
-autoload -Uz promptinit
-promptinit
-prompt adam1
-# TODO: configure this more
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%F{3}[%b]%f'
+setopt PROMPT_SUBST
+PROMPT='%K{4}%n@%m%k %B%F{2}%215<...<%~ %f%b${vcs_info_msg_0_}
+%}%F{white} %# %b%f%k'
+
+# Run this to see available colors
+# function zsh_colors() {
+#   for i in {0..255}; do
+#     print -P "%F{$i}Color $i%f"
+#   done
+# }
 
 # Completions
 fpath+=~/zsh/completions
