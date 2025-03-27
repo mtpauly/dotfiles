@@ -45,6 +45,9 @@ fi
 # Enable fzf completion
 source <(fzf --zsh)
 
+# Case insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # Aliases
 alias t=tmux
 alias n=nvim
