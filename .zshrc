@@ -61,6 +61,10 @@ source <(fzf --zsh)
 # Case insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+# Automatically populate the directory stack
+setopt AUTOPUSHD
+setopt AUTOCD
+
 # Aliases
 alias t=tmux
 alias n=nvim
