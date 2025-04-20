@@ -1,6 +1,7 @@
 require('config.lazy')
 
 -- TODO: where should these go?
+
 vim.opt.shiftwidth = 4
 
 vim.opt.number = true
@@ -8,9 +9,10 @@ vim.opt.relativenumber = true
 
 vim.keymap.set('', ';', ':', { noremap = true })
 
-
-
-
+-- Copy to system clipboard
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 
 
@@ -30,6 +32,9 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 
 
 
+
+-- comments
+-- fugitive
 
 
 
