@@ -33,6 +33,6 @@ return {
     vim.keymap.set('n', '<leader>fd', require('telescope.builtin').find_files)
     vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags)
 
-    -- TODO:
+    vim.keymap.set('n', '<leader>fg', require'config.telescope.multigrep')
   end
 }
