@@ -27,8 +27,8 @@ return {
 
     sources = {
       default = {
-	'lsp',
-	-- 'path',
+        'lsp',
+        -- 'path',
       },
     },
   },

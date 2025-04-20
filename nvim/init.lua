@@ -81,13 +81,13 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 
 -- Quickfix navigation
 vim.keymap.set('n', '<leader>qt', function()
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win.quickfix == 1 then
-            vim.cmd('cclose')
-            return
-        end
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd('cclose')
+      return
     end
-    vim.cmd('copen')
+  end
+  vim.cmd('copen')
 end, { noremap = true, silent = true })
 vim.keymap.set("n", "<c-n>", "<cmd>cnext<CR>", { noremap = true })
 vim.keymap.set("n", "<c-p>", "<cmd>cprev<CR>", { noremap = true })

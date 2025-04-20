@@ -7,23 +7,23 @@ return {
   config = function()
     require('telescope').setup {
       defaults = {
-	mappings = {
-	  i = {
-	    ["<C-j>"] = "move_selection_next",
-	    ["<C-k>"] = "move_selection_previous",
-	  },
-	},
+        mappings = {
+          i = {
+            ["<C-j>"] = "move_selection_next",
+            ["<C-k>"] = "move_selection_previous",
+          },
+        },
       },
       pickers = {
-	find_files = {
-	  theme = "ivy"
-	},
-	help_tags = {
-	  theme = "ivy"
-	},
+        find_files = {
+          theme = "ivy"
+        },
+        help_tags = {
+          theme = "ivy"
+        },
       },
       extensions = {
-	fzf = {},
+        fzf = {},
       }
     }
 

@@ -3,14 +3,14 @@ return {
   config = function()
     require'tmux'.setup {
       copy_sync = {
-	enable = false,
+        enable = false,
       },
       navigation = {
-	enable_default_keybindings = false,
-	cycle_navigation = false,
+        enable_default_keybindings = false,
+        cycle_navigation = false,
       },
       resize = {
-	enable_default_keybindings = false,
+        enable_default_keybindings = false,
       },
     }
 
