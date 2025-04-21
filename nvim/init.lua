@@ -1,3 +1,7 @@
+-- Map leader and localleader
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Default indentation
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
