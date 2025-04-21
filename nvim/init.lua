@@ -48,6 +48,9 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
+-- Fast vsplit
+vim.keymap.set('n', '<leader>m', '<cmd>vsplit<cr>')
+
 -- Use ; as :
 vim.keymap.set('', ';', ':', { noremap = true })
 
