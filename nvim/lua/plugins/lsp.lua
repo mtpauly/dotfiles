@@ -16,7 +16,9 @@ return {
     },
     config = function()
       local servers = {
-        lua_ls = {},
+        lua_ls = {}, -- https://luals.github.io/#neovim-install
+        ts_ls = {}, -- https://github.com/typescript-language-server/typescript-language-server?tab=readme-ov-file#installing
+        pyright = {}, -- https://github.com/microsoft/pyright/blob/main/docs/installation.md
       }
 
       for server, config in pairs(servers) do
