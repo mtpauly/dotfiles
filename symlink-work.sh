@@ -2,7 +2,7 @@
 
 if [ ! -d ~/.dotfiles-work ]; then
     echo "The directory ~/.dotfiles-work does not exist."
-    exit 0
+    exit 1
 fi
 
 if [ -e ~/bin-work ]; then
