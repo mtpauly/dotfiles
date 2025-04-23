@@ -29,7 +29,7 @@
     d = diff
     ds = diff --staged
     du = diff @{u}
-    l = log
+    l = log --stat
     co = checkout
     cob = checkout -b
     a = add
