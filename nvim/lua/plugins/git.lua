@@ -7,7 +7,7 @@ return {
       vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gl', '<cmd>0G log --stat --max-count=100<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gf', '<cmd>0G log -p --max-count=100 %<cr>', { noremap = true })
-      vim.keymap.set('x', '<leader>go', '<cmd>.GBrowse!<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>go', '<cmd>.GBrowse!<cr>', { noremap = true })
     end,
   },
   { 'tpope/vim-rhubarb' },
