@@ -15,12 +15,16 @@ return {
         },
       },
       pickers = {
+        -- TODO: Is there a way to set defaults here? I couldn't find one...
         find_files = {
           theme = "ivy"
         },
         help_tags = {
           theme = "ivy"
         },
+        keymaps = {
+          theme = "ivy"
+        }
       },
       extensions = {
         fzf = {},
@@ -32,6 +36,7 @@ return {
 
     vim.keymap.set('n', '<leader>fd', require('telescope.builtin').find_files)
     vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags)
+    vim.keymap.set('n', '<leader>fk', require('telescope.builtin').keymaps)
 
     vim.keymap.set('n', '<leader>fg', require'config.telescope.multigrep')
   end
