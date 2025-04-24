@@ -38,7 +38,7 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
 # Path setup
-export PATH=$PATH:$HOME/bin:$HOME/bin-personal:$HOME/bin-work
+export PATH=$PATH:$HOME/bin:$HOME/bin-personal
 # TODO: source platorform-dependent config files
 # export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
 # export PATH=/opt/homebrew/opt/llvm/bin:$PATH  # want to use this version of clang first
@@ -70,7 +70,6 @@ alias t=tmux
 alias n=nvim
 alias g=git
 alias p=python3
-alias k=kubectl
 
 alias sw=swatch
 alias tms=tmux-sessionizer
