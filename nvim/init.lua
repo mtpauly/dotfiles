@@ -67,7 +67,7 @@ vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 -- Delete without copying
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Paste into void register
 vim.keymap.set("x", "<leader>p", "\"_dP")
@@ -76,14 +76,11 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 vim.cmd([[autocmd BufEnter,BufNewFile,BufRead * set formatoptions-=cro]])
 
 -- Open help window in a vertical split to the right
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  group = vim.api.nvim_create_augroup("help_window_right", {}),
-  pattern = { "*.txt" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'help',
   callback = function()
-    if vim.o.filetype == 'help' then
-      vim.cmd.wincmd("L")
-    end
-  end
+    vim.cmd.wincmd("L")
+  end,
 })
 
 -- Quickfix navigation
