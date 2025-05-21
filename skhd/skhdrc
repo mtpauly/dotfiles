@@ -1,2 +1,3 @@
-# Fast claude query
-alt - c : ~/bin-personal/prompt-claude
+# Fast queries with a single keybind
+alt - c : ~/bin-personal/query-claude
+alt - s : ~/bin-personal/query-websearch

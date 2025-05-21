@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Google Search Launcher
+#
+# This script provides a quick way to search Google through a macOS dialog.
+# It's designed to be triggered by a system-wide keybind for fast access.
+#
+# Prerequisites:
+# - macOS (uses osascript for dialog)
+#
+# Usage:
+# - Run directly: ./query-websearch
+# - Set up a keybind in your system (e.g. via skhd) to execute this script
+#   for quick access
+#
+# The script will:
+# 1. Show a dialog to enter your search query
+# 2. URL-encode the query
+# 3. Open Google search in your default browser
+
+# Get user input via dialog
+query=$(osascript <<EOF
+tell application "System Events"
+  activate
+  set userInput to display dialog "Enter your search query:" default answer "" with title "Google Search" buttons {"Cancel", "Search"} default button "Search"
+  if button returned of userInput is "Search" then
+    return text returned of userInput
+  else
+    return ""
+  end if
+end tell
+EOF
+)
+
+# Exit if canceled or empty
+if [ -z "$query" ]; then
+  exit 0
+fi
+
+# URL encode the query
+encoded_query=$(python3 -c "import urllib.parse; print(urllib.parse.quote('''$query'''))")
+
+# Open Google search in the default browser
+open "https://www.google.com/search?q=${encoded_query}"
