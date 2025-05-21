@@ -19,6 +19,7 @@
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [fzf](https://github.com/junegunn/fzf)
 - [gh](https://github.com/cli/cli)
+- [entr](https://github.com/eradman/entr)
 
 ## Mac Setup
 
