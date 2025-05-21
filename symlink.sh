@@ -20,6 +20,7 @@ link $HOME/.dotfiles/nvim $HOME/.config/nvim
 link $HOME/.dotfiles/tmux $HOME/.config/tmux
 link $HOME/.dotfiles/kitty $HOME/.config/kitty
 link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
+link $HOME/.dotfiles/skhd $HOME/.config/skhd
 link $HOME/.dotfiles/hypr $HOME/.config/hypr
 link $HOME/.dotfiles/waybar $HOME/.config/waybar
 

@@ -16,6 +16,7 @@
 - Terminal Manager: [tmux](https://github.com/tmux/tmux)
 - Editor: [nvim](https://github.com/neovim/neovim)
 - Terminal Emulator: [kitty](https://sw.kovidgoyal.net/kitty/)
+- Hotkey Daemon: [skhd](https://github.com/koekeishiya/skhd)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [fzf](https://github.com/junegunn/fzf)
 - [gh](https://github.com/cli/cli)

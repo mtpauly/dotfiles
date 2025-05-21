@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Claude Prompt Launcher
+#
+# This script provides a quick way to send prompts to Claude AI through a macOS dialog.
+# It's designed to be triggered by a system-wide keybind for fast access.
+#
+# Prerequisites:
+# - macOS (uses osascript for dialog)
+# - The tampermonkey script at tampermonkey/claude-auto-submit.user.js must be installed
+#   in your browser to automatically submit the prompt when Claude loads
+#
+# Usage:
+# - Run directly: ./prompt-claude
+# - Set up a keybind in your system (e.g. via skhd) to execute this script for quick access
+#
+# The script will:
+# 1. Show a dialog to enter your prompt
+# 2. URL-encode the prompt
+# 3. Open Claude in your default browser with the prompt pre-filled
+# 4. The tampermonkey script will automatically submit the prompt
+
+# Get user input via dialog
+prompt=$(osascript <<EOF
+tell application "System Events"
+  activate
+  set userInput to display dialog "Enter your prompt for Claude:" default answer "" with title "Claude Query" buttons {"Cancel", "Search"} default button "Search"
+  if button returned of userInput is "Search" then
+    return text returned of userInput
+  else
+    return ""
+  end if
+end tell
+EOF
+)
+
+# Exit if canceled or empty
+if [ -z "$prompt" ]; then
+  exit 0
+fi
+
+# URL encode the prompt
+encoded_prompt=$(python3 -c "import urllib.parse; print(urllib.parse.quote('''$prompt'''))")
+
+# Open Claude in the default browser with the encoded prompt
+open "https://claude.ai/new?q=${encoded_prompt}"
