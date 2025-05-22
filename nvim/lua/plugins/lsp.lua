@@ -20,6 +20,7 @@ return {
         ts_ls = {},   -- https://github.com/typescript-language-server/typescript-language-server?tab=readme-ov-file#installing
         pyright = {}, -- https://github.com/microsoft/pyright/blob/main/docs/installation.md
         gopls = {},   -- go install golang.org/x/tools/gopls@latest
+        vimls = {},   -- https://github.com/iamcco/vim-language-server
       }
 
       local on_attach = function(client, bufnr)
