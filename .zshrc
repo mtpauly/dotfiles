@@ -69,11 +69,11 @@ setopt AUTOCD
 alias t=tmux
 alias n=nvim
 alias g=git
+alias co="gh pr checkout"
 alias p=python3
 
 alias sw=swatch
 alias tms=tmux-sessionizer
-alias kssh="kitty +kitten ssh"
 
 alias ls="ls --color"
 alias lsa="ls -alh"
