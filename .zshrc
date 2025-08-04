@@ -70,14 +70,18 @@ setopt AUTOCD
 alias t=tmux
 alias n=nvim
 alias g=git
-alias co="gh pr checkout"
+alias copr="gh pr checkout"
 alias p=python3
 
-alias sw=swatch
 alias tms=tmux-sessionizer
 
 alias ls="ls --color"
 alias lsa="ls -alh"
+
+# TODO: make more general functions like this for delete, etc
+co() {
+    git checkout $(git branch -vv --color=always | fzf --ansi | awk '{print $1}')
+}
 
 # No beep
 unsetopt BEEP LIST_BEEP
