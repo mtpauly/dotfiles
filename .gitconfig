@@ -60,3 +60,5 @@
 [includeIf "gitdir:~/.dotfiles/"]
     path = ~/.dotfiles/.gitconfig-personal
 
+[push]
+	autoSetupRemote = true
