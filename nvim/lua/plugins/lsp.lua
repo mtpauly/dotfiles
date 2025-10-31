@@ -41,6 +41,11 @@ return {
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
         vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts)
+
+        -- Disable formatexpr. This means gq will use the built-in text formatting for comment
+        -- wrapping
+        -- NOTE: If LSP formatting is something I want, should setup a new keybind for it
+        vim.bo[bufnr].formatexpr = nil
       end
 
       for server, config in pairs(servers) do

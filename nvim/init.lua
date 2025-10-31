@@ -73,7 +73,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
 -- Don't continue comments on the next line
-vim.cmd([[autocmd BufEnter,BufNewFile,BufRead * set formatoptions-=cro]])
+vim.cmd([[autocmd BufEnter,BufNewFile,BufRead * set formatoptions-=ro]])
 
 -- Open help window in a vertical split to the right
 vim.api.nvim_create_autocmd('FileType', {
