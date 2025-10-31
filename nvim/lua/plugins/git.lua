@@ -42,7 +42,23 @@ return {
           changedelete = { text = '~' },
           untracked = { text = '+' },
         },
+        signs_staged = {
+          add = { text = 'A' },
+          change = { text = 'C' },
+          delete = { text = 'D' },
+          topdelete = { text = 'D' },
+          changedelete = { text = 'C' },
+          untracked = { text = 'A' },
+        },
+        attach_to_untracked = true,
       })
+
+      vim.keymap.set('n', '<leader>gi', function()
+        vim.cmd('Gitsigns toggle_linehl')
+        vim.cmd('Gitsigns toggle_word_diff')
+      end, { noremap = true })
+      vim.keymap.set('n', '<leader>gq', '<cmd>Gitsigns setqflist all<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>gh', '<cmd>Gitsigns setqflist<cr>', { noremap = true })
     end
   },
 }
