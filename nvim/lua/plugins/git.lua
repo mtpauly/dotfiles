@@ -61,4 +61,10 @@ return {
       vim.keymap.set('n', '<leader>gh', '<cmd>Gitsigns setqflist<cr>', { noremap = true })
     end
   },
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      vim.keymap.set('n', '<leader>gD', '<cmd>DiffviewOpen<cr>', { noremap = true })
+    end,
+  },
 }
