@@ -48,6 +48,9 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
+-- Set the default textwidth to 100
+vim.opt.textwidth = 100
+
 -- Fast vsplit
 vim.keymap.set('n', '<leader>m', '<cmd>vsplit<cr>')
 
