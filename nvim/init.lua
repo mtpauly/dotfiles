@@ -69,9 +69,9 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
--- Diff mode
-vim.keymap.set("v", "<leader>do", ":diffget<cr>", { noremap = true })
-vim.keymap.set("v", "<leader>dp", ":diffput<cr>", { noremap = true })
+-- Diff get and put
+vim.keymap.set("v", "do", ":'<,'>diffget<cr>", { noremap = true })
+vim.keymap.set("v", "dp", ":'<,'>diffput<cr>", { noremap = true })
 
 -- Delete without copying
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])

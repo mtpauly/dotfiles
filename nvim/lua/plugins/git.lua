@@ -23,9 +23,11 @@ return {
       -- Set keybinds
       vim.keymap.set('n', '<leader>gs', '<cmd>0G<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gb', '<cmd>G blame<cr>', { noremap = true })
-      vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>gd', function()
+        vim.cmd('Gvdiffsplit')
+        vim.cmd('normal! zR') -- Open the context folds by default
+      end, { noremap = true })
       vim.keymap.set('n', '<leader>gl', '<cmd>0G log --stat --max-count=100<cr>', { noremap = true })
-      vim.keymap.set('n', '<leader>gf', '<cmd>0G log -p --max-count=100 %<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>go', '<cmd>.GBrowse!<cr>', { noremap = true })
     end,
   },
@@ -64,7 +66,29 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
+      require('diffview').setup({
+        use_icons = false,
+        file_panel = {
+          listing_style = 'list',
+        },
+        win_config = {
+          position = "left",
+          width = 40,
+        },
+        keymaps = {
+          view = {
+          },
+          file_panel = {
+            { 'n', 'cc', '<cmd>Git commit<cr>',                   { desc = 'git commit' } },
+            { 'n', 'ca', '<cmd>Git commit --amend<cr>',           { desc = 'git commit --amend' } },
+            { 'n', 'ce', '<cmd>Git commit --amend --no-edit<cr>', { desc = 'git commit --amend --no-edit' } },
+          },
+        },
+      })
+
       vim.keymap.set('n', '<leader>gD', '<cmd>DiffviewOpen<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>gf', '<cmd>DiffviewFileHistory %<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>gc', '<cmd>DiffviewClose<cr>', { noremap = true })
     end,
   },
 }
