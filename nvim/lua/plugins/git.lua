@@ -23,7 +23,7 @@ return {
       -- Set keybinds
       vim.keymap.set('n', '<leader>gs', '<cmd>0G<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gb', '<cmd>G blame<cr>', { noremap = true })
-      vim.keymap.set('n', '<leader>gd', function()
+      vim.keymap.set('n', '<leader>gD', function()
         vim.cmd('Gvdiffsplit')
         vim.cmd('normal! zR') -- Open the context folds by default
       end, { noremap = true })
@@ -86,7 +86,7 @@ return {
         },
       })
 
-      vim.keymap.set('n', '<leader>gD', '<cmd>DiffviewOpen<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>gd', '<cmd>DiffviewOpen<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gf', '<cmd>DiffviewFileHistory %<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>gc', '<cmd>DiffviewClose<cr>', { noremap = true })
     end,
