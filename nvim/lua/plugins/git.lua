@@ -66,14 +66,19 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
+      local file_panel_width = vim.o.columns > 210 and 70 or 50
+
       require('diffview').setup({
         use_icons = false,
         file_panel = {
-          listing_style = 'list',
-        },
-        win_config = {
-          position = "left",
-          width = 40,
+          listing_style = 'tree',
+          tree_options = {
+            folder_statuses = 'only_folded',
+          },
+          win_config = {
+            position = "left",
+            width = file_panel_width,
+          },
         },
         keymaps = {
           view = {
