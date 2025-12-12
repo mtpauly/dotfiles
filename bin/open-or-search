@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Smart URL Opener / Web Search
+#
+# This script intelligently handles clipboard content:
+# - If it's a URL, opens it directly
+# - If it's not a URL, performs a Google search
+#
+# Prerequisites:
+# - macOS (uses pbpaste for clipboard access)
+#
+# Usage:
+# - Run directly: ./open-or-search
+# - Set up a keybind in your system (e.g. via skhd) to execute this script
+#
+# The script will:
+# 1. Get the clipboard content
+# 2. Check if it's a URL (contains http://, https://, or looks like a domain)
+# 3. If URL: open it directly
+# 4. If not URL: perform a Google search
+
+# Get clipboard content
+content=$(pbpaste)
+
+# Exit if clipboard is empty
+if [ -z "$content" ]; then
+  exit 0
+fi
+
+# Check if content is a URL
+# Matches:
+# - http:// or https:// URLs
+# - www. URLs
+# - domain-like patterns (e.g., github.com, example.org)
+if [[ "$content" =~ ^https?:// ]] || [[ "$content" =~ ^www\. ]] || [[ "$content" =~ ^[a-zA-Z0-9-]+\.[a-zA-Z]{2,} ]]; then
+  # It's a URL - open it directly
+  # Add https:// if it doesn't have a protocol
+  if [[ ! "$content" =~ ^https?:// ]]; then
+    content="https://$content"
+  fi
+  open "$content"
+else
+  # It's not a URL - perform a Google search
+  # URL encode the query
+  encoded_query=$(python3 -c "import urllib.parse; print(urllib.parse.quote('''$content'''))")
+  open "https://www.google.com/search?q=${encoded_query}"
+fi
+

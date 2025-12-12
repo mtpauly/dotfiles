@@ -2,5 +2,5 @@
 alt - c : ~/bin-personal/query-claude
 alt - s : ~/bin-personal/query-websearch
 
-# Open a browser tab with the contents of the paste buffer
-alt - o : open $(pbpaste)
+# Open URL or search with the contents of the system clipboard
+alt - o : ~/.dotfiles/bin/open-or-search
