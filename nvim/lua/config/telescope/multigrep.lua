@@ -2,9 +2,10 @@ local pickers = require 'telescope.pickers'
 local finders = require 'telescope.finders'
 local make_entry = require 'telescope.make_entry'
 local conf = require 'telescope.config'.values
+local themes = require 'telescope.themes'
 
 return function(opts)
-  opts = opts or {}
+  opts = vim.tbl_deep_extend('force', themes.get_ivy(), opts or {})
   opts.cwd = opts.cwd or vim.uv.cwd()
 
   local finder = finders.new_async_job {
@@ -35,12 +36,12 @@ return function(opts)
     cwd = opts.cwd,
   }
 
-  -- TODO: make ivy?
   pickers.new(opts, {
     finder = finder,
     previewer = conf.grep_previewer(opts),
     sorter = require'telescope.sorters'.empty(),
     prompt_title = 'Multigrep',
     debounce = 100,
+    default_text = opts.default_text,
   }):find()
 end

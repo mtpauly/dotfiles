@@ -39,5 +39,13 @@ return {
     vim.keymap.set('n', '<leader>fk', require('telescope.builtin').keymaps)
 
     vim.keymap.set('n', '<leader>fg', require'config.telescope.multigrep')
+    vim.keymap.set('v', '<leader>fg', function()
+      local mode = vim.fn.mode()
+      local start_pos = vim.fn.getpos('v')
+      local end_pos = vim.fn.getpos('.')
+      local lines = vim.fn.getregion(start_pos, end_pos, { type = mode })
+      local selected_text = table.concat(lines, '\n')
+      require'config.telescope.multigrep'({ default_text = selected_text })
+    end)
   end
 }
