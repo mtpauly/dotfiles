@@ -23,5 +23,5 @@ link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
 link $HOME/.dotfiles/skhd $HOME/.config/skhd
 
 # Directories
-link $HOME/.dotfiles/bin $HOME/bin-personal
+link $HOME/.dotfiles/bin $HOME/bin
 

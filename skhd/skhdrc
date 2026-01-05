@@ -1,6 +1,6 @@
 # Fast queries with a single keybind
-alt - c : ~/bin-personal/query-claude
-alt - s : ~/bin-personal/query-websearch
+alt - c : ~/bin/query-claude
+alt - s : ~/bin/query-websearch
 
 # Open URL or search with the contents of the system clipboard
 alt - o : ~/.dotfiles/bin/open-or-search

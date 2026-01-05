@@ -38,7 +38,7 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
 # Path setup
-export PATH=$PATH:$HOME/bin:$HOME/bin-personal
+export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Source private config
