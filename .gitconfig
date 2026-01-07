@@ -44,6 +44,7 @@
     sl = stash list
     sp = stash pop
     sm = stash push -m
+    sk = stash --keep-index
     ss = switch -
 
 [commit]
