@@ -16,11 +16,12 @@ return {
     },
     config = function()
       local servers = {
-        lua_ls = {},  -- https://luals.github.io/#neovim-install
-        ts_ls = {},   -- https://github.com/typescript-language-server/typescript-language-server?tab=readme-ov-file#installing
-        pyright = {}, -- https://github.com/microsoft/pyright/blob/main/docs/installation.md
-        gopls = {},   -- go install golang.org/x/tools/gopls@latest
-        vimls = {},   -- https://github.com/iamcco/vim-language-server
+        lua_ls = {},        -- https://luals.github.io/#neovim-install
+        ts_ls = {},         -- https://github.com/typescript-language-server/typescript-language-server?tab=readme-ov-file#installing
+        pyright = {},       -- https://github.com/microsoft/pyright/blob/main/docs/installation.md
+        gopls = {},          -- go install golang.org/x/tools/gopls@latest
+        vimls = {},         -- https://github.com/iamcco/vim-language-server
+        rust_analyzer = {}, -- https://rust-analyzer.github.io/book/installation.html
       }
 
       local on_attach = function(client, bufnr)
@@ -53,6 +54,25 @@ return {
         config.on_attach = on_attach
         require 'lspconfig'[server].setup(config)
       end
+
+      -- Setup custom configs
+      -- https://github.com/grafana/jsonnet-language-server/releases
+      vim.lsp.config['jsonnet-language-server'] = {
+        cmd = { 'jsonnet-language-server' },
+        filetypes = { 'jsonnet' },
+        root_markers = { '.git' },
+        on_attach = on_attach,
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
+      }
+      vim.lsp.enable('jsonnet-language-server')
+      -- https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#integrate
+      vim.lsp.config['vscode-json-languageserver'] = {
+        cmd = { 'vscode-json-languageserver', '--stdio' },
+        filetypes = { 'json' },
+        on_attach = on_attach,
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
+      }
+      vim.lsp.enable('vscode-json-languageserver')
     end,
   }
 }
