@@ -108,5 +108,26 @@ vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 vim.keymap.set("n", "<space>x", ":.lua<CR>")
 vim.keymap.set("v", "<space>x", ":lua<CR>")
 
+-- Auto-reload files when they change on disk
+-- NOTE: This is only going to update the buffers when nvim is currently (or becomes) focused
+vim.opt.autoread = true
+vim.opt.updatetime = 200
+-- Trigger autoread when files change on disk or when buffer gains focus
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+-- Notify when file changes are detected
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  pattern = "*",
+  callback = function(args)
+    vim.notify("File `" .. args.file .. "` changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+  end,
+})
+
 -- Source plugins
 require('config.lazy')
