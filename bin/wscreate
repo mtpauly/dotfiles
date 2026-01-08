@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# wscreate - Create a new workspace from a template
+#
+# This script creates isolated workspaces from template directories. Templates are typically
+# git repos that serve as starting points for new work sessions.
+#
+# Filesystem structure:
+#   ~/workspace_templates/   - Contains template directories (e.g., repos to clone from)
+#   ~/workspaces/            - Contains created workspaces named as {template}_{name}
+#
+# Usage: wscreate <template_name> <workspace_name>
+
+set -eu
+
+TEMPLATE_DIR="$HOME/workspace_templates"
+WORKSPACE_DIR="$HOME/workspaces"
+
+mkdir -p "$TEMPLATE_DIR"
+mkdir -p "$WORKSPACE_DIR"
+
+# Show help if no arguments or --help flag
+if [ $# -lt 2 ] || [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+    echo "Usage: wscreate <template_name> <workspace_name>"
+    echo ""
+    echo "Create a new workspace from a template and start a tmux session."
+    echo ""
+    echo "Arguments:"
+    echo "  template_name    Name of the template in ~/workspace_templates/"
+    echo "  workspace_name   Name for the new workspace (will be prefixed with template name)"
+    echo ""
+    echo "Available templates:"
+    if [ -d "$TEMPLATE_DIR" ] && [ "$(ls -A "$TEMPLATE_DIR" 2>/dev/null)" ]; then
+        ls -1 "$TEMPLATE_DIR" | sed 's/^/  /'
+    else
+        echo "  (none found)"
+    fi
+    exit 0
+fi
+
+# TODO: Should show a picker for template and line input for name if not provided
+TEMPLATE_NAME="$1"
+WORKSPACE_NAME_BASE="$2"
+
+WORKSPACE_NAME="${TEMPLATE_NAME}_${WORKSPACE_NAME_BASE}"
+TEMPLATE_PATH="$TEMPLATE_DIR/$TEMPLATE_NAME"
+WORKSPACE_PATH="$WORKSPACE_DIR/$WORKSPACE_NAME"
+
+# Check that template exists and workspace doesn't
+if [ ! -d "$TEMPLATE_PATH" ]; then
+    echo "Error: Template \"$TEMPLATE_NAME\" does not exist in $TEMPLATE_DIR"
+    exit 1
+fi
+if [ -d "$WORKSPACE_PATH" ]; then
+    echo "Error: Workspace \"$WORKSPACE_NAME\" already exists in $WORKSPACE_DIR"
+    exit 1
+fi
+
+# Create the workspace
+echo "Creating workspace for template \"$TEMPLATE_NAME\" at $WORKSPACE_NAME"
+
+# TODO: Should optimize this to make it as fast as possible. Have already tried cloning from local
+# instance and it was slower and ext4 doesn't support COW. One good option could be to have a copy
+# staged at all times and just move that (then create a new copy in the background).
+# TODO: Can we time this operation?
+cp -r "$TEMPLATE_PATH" "$WORKSPACE_PATH"
+
+# If tmux isn't running, start it with the new session attached
+if [[ -z ${TMUX:-} ]]; then
+    tmux new-session -A -s "$WORKSPACE_NAME" -c "$WORKSPACE_PATH"
+    exit 0
+fi
+
+# Otherwise attach the current client
+tmux new-session -d -s "$WORKSPACE_NAME" -c "$WORKSPACE_PATH"
+tmux switch-client -t "$WORKSPACE_NAME"
+
+# TODO: Should have some mechanism to keep the template repos up to date. Do it here in the
+# background or as a continuously running job?

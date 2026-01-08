@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Interactively select and delete a workspace from ~/workspaces using fzf
+
+set -eu
+
+WORKSPACE_DIR="$HOME/workspaces"
+
+WORKSPACES=$(ls "$WORKSPACE_DIR")
+if [[ -z $WORKSPACES ]]; then
+    echo "No workspaces to delete"
+    exit 0
+fi
+
+TO_DELETE=$(echo "$WORKSPACES" | fzf)
+
+rm -rf "$WORKSPACE_DIR/$TO_DELETE"
+
+echo "Successfully deleted workspace $TO_DELETE"
