@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Pull the latest changes in all workspace templates
+
+set -eu
+
+TEMPLATE_DIR="$HOME/workspace_templates"
+
+if [[ ! -d "$TEMPLATE_DIR" ]]; then
+    echo "Template directory does not exist: $TEMPLATE_DIR"
+    exit 1
+fi
+
+TEMPLATES=$(ls "$TEMPLATE_DIR" 2>/dev/null)
+if [[ -z "$TEMPLATES" ]]; then
+    echo "No templates found in $TEMPLATE_DIR"
+    exit 0
+fi
+
+echo "Updating workspace templates..."
+echo ""
+
+for TEMPLATE in $TEMPLATES; do
+    TEMPLATE_PATH="$TEMPLATE_DIR/$TEMPLATE"
+
+    if [[ ! -d "$TEMPLATE_PATH/.git" ]]; then
+        echo "⏭️  $TEMPLATE (not a git repo, skipping)"
+        continue
+    fi
+
+    echo -n "📦 $TEMPLATE: "
+
+    # Fetch and check if there are updates
+    if ! git -C "$TEMPLATE_PATH" fetch --quiet 2>/dev/null; then
+        echo "❌ fetch failed"
+        continue
+    fi
+
+    # Check if we're behind upstream
+    LOCAL=$(git -C "$TEMPLATE_PATH" rev-parse HEAD 2>/dev/null)
+    UPSTREAM=$(git -C "$TEMPLATE_PATH" rev-parse @{u} 2>/dev/null)
+
+    if [[ "$LOCAL" == "$UPSTREAM" ]]; then
+        echo "✅ already up to date"
+    else
+        # Pull the changes
+        if git -C "$TEMPLATE_PATH" pull --quiet 2>/dev/null; then
+            echo "✅ updated"
+        else
+            echo "❌ pull failed (possibly uncommitted changes)"
+        fi
+    fi
+done
+
+echo ""
+echo "Done!"
