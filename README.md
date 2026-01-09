@@ -32,5 +32,8 @@
 
 ## `neovim` Setup
 
-TODO: give overview
-
+- Plugin Manager: [lazy.nvim](https://github.com/folke/lazy.nvim)
+- Completion: [blink.cmp](https://github.com/Saghen/blink.cmp)
+- LSP: [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- File Navigation: [telescope](https://github.com/nvim-telescope/telescope.nvim), [oil.nvim](https://github.com/stevearc/oil.nvim), [harpoon](https://github.com/ThePrimeagen/harpoon)
+- Git: [diffview.nvim](https://github.com/sindrets/diffview.nvim), [fugitive](https://github.com/tpope/vim-fugitive)
