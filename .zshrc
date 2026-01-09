@@ -41,6 +41,10 @@ bindkey '^N' history-search-forward
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/go/bin
 
+# Workspace directories for ws* scripts
+export WORKSPACE_DIR="$HOME/workspaces"
+export TEMPLATE_DIR="$HOME/workspace_templates"
+
 # Source private config
 ZSHRC_PRIVATE=~/.dotfiles/zshrc_private
 if [[ -f $ZSHRC_PRIVATE ]]; then

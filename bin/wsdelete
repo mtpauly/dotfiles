@@ -3,7 +3,10 @@
 
 set -eu
 
-WORKSPACE_DIR="$HOME/workspaces"
+if [[ -z "${WORKSPACE_DIR:-}" ]]; then
+    echo "Error: WORKSPACE_DIR environment variable is not set"
+    exit 1
+fi
 
 WORKSPACES=$(ls "$WORKSPACE_DIR")
 if [[ -z $WORKSPACES ]]; then
