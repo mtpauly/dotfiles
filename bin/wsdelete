@@ -13,6 +13,47 @@ fi
 
 TO_DELETE=$(echo "$WORKSPACES" | fzf)
 
-rm -rf "$WORKSPACE_DIR/$TO_DELETE"
+WORKSPACE_PATH="$WORKSPACE_DIR/$TO_DELETE"
 
-echo "Successfully deleted workspace $TO_DELETE"
+# Check for warnings
+WARNINGS=""
+
+# Check for active tmux session
+if tmux has-session -t "$TO_DELETE" 2>/dev/null; then
+    WARNINGS+="⚠️  tmux session exists\n"
+fi
+
+if [[ -d "$WORKSPACE_PATH/.git" ]]; then
+    # Check for uncommitted changes
+    UNCOMMITTED=$(git -C "$WORKSPACE_PATH" status --porcelain 2>/dev/null)
+    if [[ -n "$UNCOMMITTED" ]]; then
+        WARNINGS+="⚠️  Uncommitted changes detected!\n"
+    fi
+
+    # Check for unpushed commits (commits ahead of upstream)
+    UNPUSHED=$(git -C "$WORKSPACE_PATH" log @{u}..HEAD --oneline 2>/dev/null)
+    if [[ -n "$UNPUSHED" ]]; then
+        WARNINGS+="⚠️  Unpushed commits detected!\n"
+    fi
+fi
+
+# If there are warnings, ask for confirmation
+if [[ -n "$WARNINGS" ]]; then
+    echo -e "\n${WARNINGS}"
+    read -p "Are you sure you want to delete '$TO_DELETE'? [y/N] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Deletion cancelled."
+        exit 0
+    fi
+fi
+
+rm -rf "$WORKSPACE_PATH"
+
+# Kill tmux session if it exists
+if tmux has-session -t "$TO_DELETE" 2>/dev/null; then
+    tmux kill-session -t "$TO_DELETE"
+    echo "Successfully deleted workspace $TO_DELETE and killed tmux session"
+else
+    echo "Successfully deleted workspace $TO_DELETE"
+fi
