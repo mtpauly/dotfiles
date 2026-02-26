@@ -8,6 +8,7 @@ copy of a template, with its own tmux session.
 Filesystem structure:
   ~/workspace_templates/   - Template directories (source repos to clone from)
   ~/workspaces/            - Created workspaces, named as {template}_{name}
+  ~/workspaces/.staged/    - Pre-copied templates for fast workspace creation
 
 Actions:
   create  - Pick a template, name the workspace, copy it, and open a tmux session
@@ -36,6 +37,7 @@ import sys
 
 TEMPLATE_DIR = os.environ.get("TEMPLATE_DIR")
 WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR")
+STAGED_DIR = os.path.join(WORKSPACE_DIR, ".staged") if WORKSPACE_DIR else None
 # Set via tmux.conf to pause before exiting so errors are visible
 EPHEMERAL_PANE = os.environ.get("SPACE_EPHEMERAL") == "1"
 
@@ -65,9 +67,27 @@ def fzf(options: list[str], prompt: str = "") -> str | None:
     return result.stdout.strip()
 
 
+def staged_path_for(template: str) -> str:
+    return os.path.join(STAGED_DIR, template)
+
+
+def restage_in_background(template: str):
+    """Kick off a background process to copy the template to the staged directory."""
+    template_path = os.path.join(TEMPLATE_DIR, template)
+    staged = staged_path_for(template)
+    # Use a subshell so we don't block. Remove any stale staged copy first.
+    subprocess.Popen(
+        f'rm -rf "{staged}" && cp -r "{template_path}" "{staged}"',
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 def create():
     os.makedirs(TEMPLATE_DIR, exist_ok=True)
     os.makedirs(WORKSPACE_DIR, exist_ok=True)
+    os.makedirs(STAGED_DIR, exist_ok=True)
 
     templates = os.listdir(TEMPLATE_DIR)
     if not templates:
@@ -93,8 +113,16 @@ def create():
     if os.path.exists(workspace_path):
         exit_with_error(f'Error: Workspace "{workspace_name}" already exists in {WORKSPACE_DIR}')
 
-    print(f'Creating workspace for template "{template}" at {workspace_name}')
-    subprocess.run(["cp", "-r", template_path, workspace_path])
+    staged = staged_path_for(template)
+    if os.path.isdir(staged):
+        print(f'Creating workspace from staged copy (fast)')
+        os.rename(staged, workspace_path)
+        restage_in_background(template)
+    else:
+        print(f'No staged copy available, copying template (this may take a moment)...')
+        subprocess.run(["cp", "-r", template_path, workspace_path])
+        # Stage a copy for next time
+        restage_in_background(template)
 
     tmux_in_session = os.environ.get("TMUX")
     if not tmux_in_session:
@@ -105,7 +133,7 @@ def create():
 
 
 def delete():
-    workspaces = os.listdir(WORKSPACE_DIR)
+    workspaces = [w for w in os.listdir(WORKSPACE_DIR) if w != ".staged"]
     if not workspaces:
         exit_with_error("No workspaces to delete", code=0)
 
@@ -195,7 +223,18 @@ def update():
             else:
                 print("   ❌ pull failed (possibly uncommitted changes)")
 
-    print("\nDone!")
+    # Restage all templates since they may have changed
+    print("\nRestaging templates...")
+    os.makedirs(STAGED_DIR, exist_ok=True)
+    for template in sorted(templates):
+        template_path = os.path.join(TEMPLATE_DIR, template)
+        if os.path.isdir(template_path):
+            staged = staged_path_for(template)
+            if os.path.exists(staged):
+                shutil.rmtree(staged)
+            subprocess.run(["cp", "-r", template_path, staged])
+
+    print("Done!")
     pause()
 
 
