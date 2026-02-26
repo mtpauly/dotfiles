@@ -83,6 +83,7 @@ def restage_in_background(template: str):
         shell=True,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
+        start_new_session=True,
     )
 
 
