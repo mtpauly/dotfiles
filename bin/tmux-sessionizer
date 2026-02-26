@@ -11,6 +11,7 @@ $HOME/.dotfiles-work"
 # Each subdirectory will be added to the directory options list
 selected_dirs=(
     ~/repos
+    ~/workspaces
     ~/personal
     ~/research
     ~/work
