@@ -6,9 +6,10 @@ git repos that serve as starting points for new work sessions. Each workspace is
 copy of a template, with its own tmux session.
 
 Filesystem structure:
-  ~/workspace_templates/   - Template directories (source repos to clone from)
-  ~/workspaces/            - Created workspaces, named as {template}_{name}
-  ~/workspaces/.staged/    - Pre-copied templates for fast workspace creation
+  ~/workspace_templates/          - Template directories (source repos to clone from)
+  ~/workspace_templates/.setup/   - Optional setup scripts per template (e.g., .setup/myrepo)
+  ~/workspaces/                   - Created workspaces, named as {template}_{name}
+  ~/workspaces/.staged/           - Pre-copied templates for fast workspace creation
 
 Actions:
   create  - Pick a template, name the workspace, copy it, and open a tmux session
@@ -38,6 +39,7 @@ import sys
 TEMPLATE_DIR = os.environ.get("TEMPLATE_DIR")
 WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR")
 STAGED_DIR = os.path.join(WORKSPACE_DIR, ".staged") if WORKSPACE_DIR else None
+SETUP_DIR = os.path.join(TEMPLATE_DIR, ".setup") if TEMPLATE_DIR else None
 # Set via tmux.conf to pause before exiting so errors are visible
 EPHEMERAL_PANE = os.environ.get("SPACE_EPHEMERAL") == "1"
 
@@ -89,7 +91,7 @@ def create():
     os.makedirs(WORKSPACE_DIR, exist_ok=True)
     os.makedirs(STAGED_DIR, exist_ok=True)
 
-    templates = os.listdir(TEMPLATE_DIR)
+    templates = [t for t in os.listdir(TEMPLATE_DIR) if t != ".setup"]
     if not templates:
         exit_with_error(f"No templates found in {TEMPLATE_DIR}")
 
@@ -124,11 +126,22 @@ def create():
         # Stage a copy for next time
         restage_in_background(template)
 
+    setup_script = os.path.join(SETUP_DIR, template) if SETUP_DIR else None
+
     tmux_in_session = os.environ.get("TMUX")
     if not tmux_in_session:
-        os.execlp("tmux", "tmux", "new-session", "-A", "-s", session_name, "-c", workspace_path)
+        tmux_args = ["tmux", "new-session", "-A", "-s", session_name, "-c", workspace_path]
+        if setup_script and os.path.isfile(setup_script) and os.access(setup_script, os.X_OK):
+            # Start tmux detached, send the setup command, then attach
+            subprocess.run(["tmux", "new-session", "-d", "-s", session_name, "-c", workspace_path])
+            subprocess.run(["tmux", "send-keys", "-t", session_name, setup_script, "Enter"])
+            os.execlp("tmux", "tmux", "attach-session", "-t", session_name)
+        else:
+            os.execlp(*tmux_args)
     else:
         subprocess.run(["tmux", "new-session", "-d", "-s", session_name, "-c", workspace_path])
+        if setup_script and os.path.isfile(setup_script) and os.access(setup_script, os.X_OK):
+            subprocess.run(["tmux", "send-keys", "-t", session_name, setup_script, "Enter"])
         subprocess.run(["tmux", "switch-client", "-t", session_name])
 
 
@@ -190,7 +203,7 @@ def delete():
 
 
 def update():
-    templates = os.listdir(TEMPLATE_DIR)
+    templates = [t for t in os.listdir(TEMPLATE_DIR) if t != ".setup"]
     if not templates:
         exit_with_error(f"No templates found in {TEMPLATE_DIR}")
 
