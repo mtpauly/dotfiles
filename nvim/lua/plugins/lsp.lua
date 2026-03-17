@@ -19,9 +19,10 @@ return {
         lua_ls = {},        -- https://luals.github.io/#neovim-install
         ts_ls = {},         -- https://github.com/typescript-language-server/typescript-language-server?tab=readme-ov-file#installing
         pyright = {},       -- https://github.com/microsoft/pyright/blob/main/docs/installation.md
-        gopls = {},          -- go install golang.org/x/tools/gopls@latest
+        gopls = {},         -- go install golang.org/x/tools/gopls@latest
         vimls = {},         -- https://github.com/iamcco/vim-language-server
         rust_analyzer = {}, -- https://rust-analyzer.github.io/book/installation.html
+        sourcekit = {},     -- https://github.com/swiftlang/sourcekit-lsp
       }
 
       local on_attach = function(client, bufnr)
