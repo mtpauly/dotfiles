@@ -23,6 +23,7 @@ return {
         vimls = {},         -- https://github.com/iamcco/vim-language-server
         rust_analyzer = {}, -- https://rust-analyzer.github.io/book/installation.html
         sourcekit = {},     -- https://github.com/swiftlang/sourcekit-lsp
+        buf_ls = {},        -- https://github.com/bufbuild/buf
       }
 
       local on_attach = function(client, bufnr)
@@ -53,7 +54,8 @@ return {
       for server, config in pairs(servers) do
         config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
         config.on_attach = on_attach
-        require 'lspconfig'[server].setup(config)
+        vim.lsp.config[server] = config
+        vim.lsp.enable(server)
       end
 
       -- Setup custom configs
