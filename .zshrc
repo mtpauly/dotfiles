@@ -42,8 +42,8 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Workspace directories for ws* scripts
-export WORKSPACE_DIR="$HOME/workspaces"
-export TEMPLATE_DIR="$HOME/workspace_templates"
+export SPACE_WORKSPACES="$HOME/workspaces"
+export SPACE_TEMPLATES="$HOME/workspace_templates"
 
 # Source private config
 ZSHRC_PRIVATE=~/.dotfiles/zshrc_private
