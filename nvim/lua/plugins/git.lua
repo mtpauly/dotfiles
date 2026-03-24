@@ -66,7 +66,7 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
-      local file_panel_width = vim.o.columns > 210 and 70 or 50
+      local file_panel_width = vim.o.columns > 280 and 70 or 50
 
       require('diffview').setup({
         use_icons = false,
@@ -84,9 +84,10 @@ return {
           view = {
           },
           file_panel = {
-            { 'n', 'cc', '<cmd>Git commit<cr>',                   { desc = 'git commit' } },
-            { 'n', 'ca', '<cmd>Git commit --amend<cr>',           { desc = 'git commit --amend' } },
-            { 'n', 'ce', '<cmd>Git commit --amend --no-edit<cr>', { desc = 'git commit --amend --no-edit' } },
+            { 'n', 'cc',        '<cmd>Git commit<cr>',                          { desc = 'git commit' } },
+            { 'n', 'ca',        '<cmd>Git commit --amend<cr>',                  { desc = 'git commit --amend' } },
+            { 'n', 'ce',        '<cmd>Git commit --amend --no-edit<cr>',        { desc = 'git commit --amend --no-edit' } },
+            { 'n', '<leader>e', require("diffview.config").actions.focus_entry, { desc = 'focus entry' } },
           },
         },
       })
