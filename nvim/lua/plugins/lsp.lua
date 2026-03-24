@@ -24,26 +24,47 @@ return {
         rust_analyzer = {}, -- https://rust-analyzer.github.io/book/installation.html
         sourcekit = {},     -- https://github.com/swiftlang/sourcekit-lsp
         buf_ls = {},        -- https://github.com/bufbuild/buf
+        -- https://github.com/grafana/jsonnet-language-server/releases
+        ['jsonnet-language-server'] = {
+          cmd = { 'jsonnet-language-server' },
+          filetypes = { 'jsonnet' },
+          root_markers = { '.git' },
+        },
+        -- https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#integrate
+        ['vscode-json-languageserver'] = {
+          cmd = { 'vscode-json-languageserver', '--stdio' },
+          filetypes = { 'json' },
+        },
       }
 
       local on_attach = function(client, bufnr)
-        -- Format the current buffer on save
+        -- Automatically format the current buffer on save for specific filetypes
+        local auto_format_filetypes = { "lua" }
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("Format", { clear = true }),
             buffer = bufnr,
-            callback = function() vim.lsp.buf.format({ bufnr = bufnr, id = client.id }) end,
+            callback = function()
+              if vim.tbl_contains(auto_format_filetypes, vim.bo[bufnr].filetype) then
+                vim.lsp.buf.format({ bufnr = bufnr, id = client.id })
+              end
+            end,
           })
         end
 
         -- Set keybinds
         local opts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts)
+        local function with_desc(desc) return vim.tbl_extend("force", opts, { desc = desc }) end
+
+        vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, with_desc("Go to definition"))
+        vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, with_desc("Go to declaration"))
+        vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end, with_desc("Go to type definition"))
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, with_desc("Hover documentation"))
+        vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, with_desc("List references"))
+        vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, with_desc("Show diagnostics"))
+
+        vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", with_desc("LSP info"))
+        vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ bufnr = bufnr, id = client.id }) end, with_desc("Format buffer"))
 
         -- Disable formatexpr. This means gq will use the built-in text formatting for comment
         -- wrapping
@@ -57,25 +78,6 @@ return {
         vim.lsp.config[server] = config
         vim.lsp.enable(server)
       end
-
-      -- Setup custom configs
-      -- https://github.com/grafana/jsonnet-language-server/releases
-      vim.lsp.config['jsonnet-language-server'] = {
-        cmd = { 'jsonnet-language-server' },
-        filetypes = { 'jsonnet' },
-        root_markers = { '.git' },
-        on_attach = on_attach,
-        capabilities = require('blink.cmp').get_lsp_capabilities(),
-      }
-      vim.lsp.enable('jsonnet-language-server')
-      -- https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#integrate
-      vim.lsp.config['vscode-json-languageserver'] = {
-        cmd = { 'vscode-json-languageserver', '--stdio' },
-        filetypes = { 'json' },
-        on_attach = on_attach,
-        capabilities = require('blink.cmp').get_lsp_capabilities(),
-      }
-      vim.lsp.enable('vscode-json-languageserver')
     end,
   }
 }
