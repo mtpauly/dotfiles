@@ -79,13 +79,40 @@ alias ls="ls --color"
 alias lsa="ls -alh"
 alias mkdir="mkdir -p"
 
-# TODO: make more general functions like this for delete, etc
-co() {
-    git checkout $(git branch -vv --color=always | fzf --ansi | awk '{print $1}')
-}
-
 # No beep
 unsetopt BEEP LIST_BEEP
+
+# Checkout a PR and open it in nvim
+# Takes a PR number as an argument or opens an interactive picker if none provided
+review() {
+  if [[ -n "$1" ]]; then
+    pr_number="$1"
+  else
+    pr_number=$(gh pr list --search "review-requested:@me" \
+      --json number,title,author,headRefName \
+      --jq '.[] | "\(.number)\t\(.author.login)\t\(.title)"' \
+      | fzf --with-nth=1,2,3 --delimiter='\t' \
+            --preview 'gh pr view {1}' \
+            --preview-window=right:60% \
+      | cut -f1)
+  fi
+
+  gh pr checkout "$pr_number"
+  remote_base=$(gh pr view "$pr_number" --json baseRefName,headRefName | jq -r '.baseRefName')
+  git fetch origin "$remote_base"
+
+  merge_base=$(git merge-base "origin/$remote_base" HEAD)
+  echo "Diffing HEAD against origin/$remote_base (common ancestor: $merge_base)"
+
+  # From: https://github.com/sindrets/diffview.nvim/blob/main/USAGE.md#review-a-pr
+  nvim -c ":DiffviewOpen origin/${remote_base}...HEAD --imply-local"
+}
+
+# Decodes a JWT token, outputting the header and payload as a JSON array
+# Usage: jwt-decode <token> OR echo <token> | jwt-decode
+jwt-decode() {
+  jq -R 'split(".") | .[0:2] | map(@base64d) | map(fromjson)' <<< "${1:-$(cat)}"
+}
 
 # Syntax highlighting (must be sourced at the end of the zshrc)
 # https://github.com/zsh-users/zsh-syntax-highlighting/tree/master?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
