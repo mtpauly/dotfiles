@@ -23,6 +23,11 @@ link $HOME/.dotfiles/aerospace $HOME/.config/aerospace
 link $HOME/.dotfiles/skhd $HOME/.config/skhd
 link $HOME/.dotfiles/lazygit $HOME/.config/lazygit
 
-# Directories
-link $HOME/.dotfiles/bin $HOME/bin
+# Bin scripts
+mkdir -p $HOME/bin
+link $HOME/.dotfiles/bin/open-or-search $HOME/bin/open-or-search
+link $HOME/.dotfiles/bin/query-claude $HOME/bin/query-claude
+link $HOME/.dotfiles/bin/query-websearch $HOME/bin/query-websearch
+link $HOME/.dotfiles/bin/space $HOME/bin/space
+link $HOME/.dotfiles/bin/tmux-sessionizer $HOME/bin/tmux-sessionizer
 
