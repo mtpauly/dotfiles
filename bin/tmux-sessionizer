@@ -5,7 +5,6 @@
 # Directory options
 opts="default
 $HOME/.dotfiles
-$HOME/.dotfiles/nvim
 $HOME/.dotfiles-work"
 
 # Each subdirectory will be added to the directory options list
