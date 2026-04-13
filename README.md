@@ -3,9 +3,9 @@
 ## Setup
 
 - `git clone git@github.com:mtpauly/dotfiles.git $HOME/.dotfiles`
-- `cd $HOME/.dotfiles && ./symlink.sh`
+- `cd $HOME/.dotfiles && ./setup.sh`
 - Use `bin/` for any scripts you want added to `$PATH`
-- Use `zshrc_private/` for any environment variables and additional configuration. All files in this directory are sourced at the bottom of `.zshrc`
+- Use `shell_private` for secrets, API keys, and machine-specific environment variables (gitignored)
 
 ## Tools
 

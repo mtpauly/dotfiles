@@ -1,11 +1,14 @@
-# History configuration
+# Source shared config (aliases, functions, PATH, work and private config)
+source "$HOME/.dotfiles/shell_common.sh"
+
+# History
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=10000
 
 # Prompt
 autoload -Uz vcs_info
-precmd() { 
+precmd() {
     vcs_info
     if [[ -n $PROMPT_INCLUDE_NEWLINE ]]; then
         print
@@ -23,8 +26,8 @@ PROMPT='%K{4}%n@%m%k %B%F{97}%215<...<%~ %f%b${vcs_info_msg_0_}
 # done
 
 # Completions
-fpath+=~/zsh/completions  # Add custom completions directory
 autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Vim mode (this needs to go before autosuggestions or it will break the keybind)
 bindkey -v
@@ -37,82 +40,14 @@ bindkey '^Y' autosuggest-accept
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
-# Path setup
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/go/bin
-
-# Workspace directories for ws* scripts
-export SPACE_WORKSPACES="$HOME/workspaces"
-export SPACE_TEMPLATES="$HOME/workspace_templates"
-
-# Source private config
-ZSHRC_PRIVATE=~/.dotfiles/zshrc_private
-if [[ -f $ZSHRC_PRIVATE ]]; then
-    source $ZSHRC_PRIVATE
-fi
-
-# Source work zshrc
-ZSHRC_WORK=~/.dotfiles-work/.zshrc
-if [[ -f $ZSHRC_WORK ]]; then
-    source $ZSHRC_WORK
-fi
-
 # Enable fzf completion
 source <(fzf --zsh)
-
-# Case insensitive tab completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Automatically populate the directory stack
 setopt AUTOPUSHD AUTOCD
 
-# Aliases
-alias t=tmux
-alias n=nvim
-alias g=git
-alias copr="gh pr checkout"
-alias p=python3
-
-alias tms=tmux-sessionizer
-
-alias ls="ls --color"
-alias lsa="ls -alh"
-alias mkdir="mkdir -p"
-
 # No beep
 unsetopt BEEP LIST_BEEP
-
-# Checkout a PR and open it in nvim
-# Takes a PR number as an argument or opens an interactive picker if none provided
-review() {
-  if [[ -n "$1" ]]; then
-    pr_number="$1"
-  else
-    pr_number=$(gh pr list --search "review-requested:@me" \
-      --json number,title,author,headRefName \
-      --jq '.[] | "\(.number)\t\(.author.login)\t\(.title)"' \
-      | fzf --with-nth=1,2,3 --delimiter='\t' \
-            --preview 'gh pr view {1}' \
-            --preview-window=right:60% \
-      | cut -f1)
-  fi
-
-  gh pr checkout "$pr_number"
-  remote_base=$(gh pr view "$pr_number" --json baseRefName,headRefName | jq -r '.baseRefName')
-  git fetch origin "$remote_base"
-
-  merge_base=$(git merge-base "origin/$remote_base" HEAD)
-  echo "Diffing HEAD against origin/$remote_base (common ancestor: $merge_base)"
-
-  # From: https://github.com/sindrets/diffview.nvim/blob/main/USAGE.md#review-a-pr
-  nvim -c ":DiffviewOpen origin/${remote_base}...HEAD --imply-local"
-}
-
-# Decodes a JWT token, outputting the header and payload as a JSON array
-# Usage: jwt-decode <token> OR echo <token> | jwt-decode
-jwt-decode() {
-  jq -R 'split(".") | .[0:2] | map(@base64d) | map(fromjson)' <<< "${1:-$(cat)}"
-}
 
 # Syntax highlighting (must be sourced at the end of the zshrc)
 # https://github.com/zsh-users/zsh-syntax-highlighting/tree/master?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file

@@ -4,15 +4,18 @@ link() {
     src="$1"
     dst="$2"
 
-    if [ -e $dst ]; then
-        rm $dst || exit 1
+    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+        echo "WARNING: $dst already exists, skipping"
+        return
     fi
 
-    ln -s $src $dst
+    ln -sfn "$src" "$dst"
 }
 
-# Files
+# Shell and git
 link $HOME/.dotfiles/.zshrc $HOME/.zshrc
+link $HOME/.dotfiles/.bashrc $HOME/.bashrc
+link $HOME/.dotfiles/.bash_profile $HOME/.bash_profile
 link $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 
 # Config
@@ -28,6 +31,5 @@ mkdir -p $HOME/bin
 link $HOME/.dotfiles/bin/open-or-search $HOME/bin/open-or-search
 link $HOME/.dotfiles/bin/query-claude $HOME/bin/query-claude
 link $HOME/.dotfiles/bin/query-websearch $HOME/bin/query-websearch
-link $HOME/.dotfiles/bin/space $HOME/bin/space
 link $HOME/.dotfiles/bin/tmux-sessionizer $HOME/bin/tmux-sessionizer
 
