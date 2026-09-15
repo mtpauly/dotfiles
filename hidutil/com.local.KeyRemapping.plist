@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.local.KeyRemapping</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/hidutil</string>
+        <string>property</string>
+        <!-- Apply the overrides only to the built in keyboard. -->
+        <!-- VendorID and ProductID of 0 should be consistent on apple silicon. -->
+        <string>--matching</string>
+        <string>{"VendorID":0,"ProductID":0}</string>
+        <string>--set</string>
+        <!-- 0x2A is Delete/Backspace, 0x31 is Backslash; we swap both directions -->
+        <!-- 0x29 is Escape, 0x35 is Grave/Backtick; we swap both directions. -->
+        <!-- 0x39 is Capslock, 0xE0 is Left Control; we swap only Capslock->Control. -->
+        <string>{"UserKeyMapping": [
+            {
+                "HIDKeyboardModifierMappingSrc": 0x70000002A,
+                "HIDKeyboardModifierMappingDst": 0x700000031
+            },
+            {
+                "HIDKeyboardModifierMappingSrc": 0x700000031,
+                "HIDKeyboardModifierMappingDst": 0x70000002A
+            },
+            {
+                "HIDKeyboardModifierMappingSrc": 0x700000029,
+                "HIDKeyboardModifierMappingDst": 0x700000035
+            },
+            {
+                "HIDKeyboardModifierMappingSrc": 0x700000035,
+                "HIDKeyboardModifierMappingDst": 0x700000029
+            },
+            {
+                "HIDKeyboardModifierMappingSrc": 0x700000039,
+                "HIDKeyboardModifierMappingDst": 0x7000000E0
+            }
+        ]}</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
