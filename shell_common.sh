@@ -1,7 +1,9 @@
 # Shared aliases, functions, and environment — sourced by both .bashrc and .zshrc
 
 # Path
-export PATH="$HOME/bin:$HOME/go/bin:/usr/local/go/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
 
 # Workspace directories for ws* scripts
 export SPACE_WORKSPACES="$HOME/workspaces"
