@@ -29,6 +29,8 @@
 - Keyboard Customizer: [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 - Night Shift: [flux](https://justgetflux.com/)
 - Font: [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
+    - Download `FiraCode.zip` from the [latest release](https://github.com/ryanoasis/nerd-fonts/releases/latest)
+    - Unzip and install files with Font Book
 
 ## `neovim` Setup
 
